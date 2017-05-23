@@ -1,4 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+.m-big-top{
+    margin-top: 7rem;
+}
+.m-right{
+    margin-right: 1rem;
+}
+.m-top{
+    margin-top: 1rem;
+}
+.m-half-top{
+    margin-top: 5rem;
+}
+.m-top-bottom{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.p-half{
+    padding: 3.5rem;
+}
+
 .remove-float{
     float: none !important;
 }

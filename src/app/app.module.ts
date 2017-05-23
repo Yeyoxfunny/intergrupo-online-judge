@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FlashMessagesModule } from 'angular2-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
+import { CKEditorModule  } from 'ng2-ckeditor';
 
 //Owns Components
 import { AppComponent } from './app.component';
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    FlashMessagesModule
+    FlashMessagesModule,
+    CKEditorModule 
   ],
   providers: [ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]

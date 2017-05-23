@@ -1,3 +1,50 @@
-<p>
-  dashboard works!
-</p>
+<app-navbar></app-navbar>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-10">
+			<h4>Crear Test</h4>
+		</div>
+		<div class="col-sm-2">
+			<button class="btn btn-success">Publicar</button>
+		</div>
+	</div>
+
+	<form #formRef="ngForm">
+		<div class="form-group">
+			<label for="test">Título del test</label>
+			<input type="email" class="form-control" id="test" name="title" #title="ngModel" ngModel>
+		</div>
+
+		<div class="form-group">
+			<label>Dificultad</label>
+			<select class="form-control">
+				<option value="">Fácil</option>
+				<option value="">Medio</option>
+				<option value="">Difícil</option>
+			</select>
+		</div>
+
+
+		<div class="form-group">
+			<label>Lenguajes soportados</label>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="supported" [(ngModel)]="supportedLanguages"> Java
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="supported"  [(ngModel)]="supportedLanguages"> C#
+				</label>
+			</div>
+		</div>
+	</form>
+	<div class="form-group">
+		<ckeditor
+			[config]="{ height: '450px', resize_enabled: false }"
+			[(ngModel)]="ckeditorContent"
+			(change)="onChange($event)"
+			debounce="500">
+		</ckeditor>		
+	</div>
+</div>

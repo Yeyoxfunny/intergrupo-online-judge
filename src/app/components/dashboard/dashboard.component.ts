@@ -8,13 +8,19 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+	
+	ckeditorContent: string;
+	supportedLanguages;
 
-  constructor(
-    private _router: Router,
-    private _authService: AuthService
-    ) { }
+	constructor(
+	 private _router: Router,
+	 private _authService: AuthService
+	 ) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
+	onChange($event){
+		console.log(this.supportedLanguages);
+	}
 }
