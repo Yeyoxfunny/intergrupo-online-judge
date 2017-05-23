@@ -13,14 +13,18 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HackrankComponent } from './components/hackrank/hackrank.component';
+import { ChallengeComponent } from './components/challenge/challenge.component';
 
 //Services
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+
 const appRoutes: Routes = [
-    {path: '', component: LoginComponent},
-    {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
-    {path: 'rank', component: HackrankComponent, canActivate: [AuthGuard]}
+    { path: '', component: LoginComponent },
+    { path: 'home', component: HomeComponent },
+    { path: 'challenge', component: ChallengeComponent },
+    { path: 'dashboard', component: DashboardComponent },
+    { path: 'rank', component: HackrankComponent }
 ]
 
 @NgModule({
@@ -31,6 +35,7 @@ const appRoutes: Routes = [
     HomeComponent,
     DashboardComponent,
     HackrankComponent,
+    ChallengeComponent,
   ],
   imports: [
     BrowserModule,
