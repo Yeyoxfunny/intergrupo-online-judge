@@ -10,18 +10,20 @@ import { Router } from '@angular/router';
 export class NavbarComponent implements OnInit {
 
   public auth;
+  private user: any;
 
   constructor(
-    private _authService: AuthService,
-    private _router: Router
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
+    this.user = this.authService.getStoredUserData();
   }
   
   onLogoutClick(){
-    this._authService.logout();
-    this._router.navigate(['']);
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 
 }

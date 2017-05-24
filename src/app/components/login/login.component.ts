@@ -17,9 +17,9 @@ export class LoginComponent implements OnInit {
   auth: String;
 
   constructor(
-    private _authService: AuthService,
-    private _router: Router,
-    private _flashMessage: FlashMessagesService) { }
+    private authService: AuthService,
+    private router: Router,
+    private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
 
@@ -31,28 +31,26 @@ export class LoginComponent implements OnInit {
       password: this.password
     }
 
-    this._authService.authenticateUser(user).subscribe(data => {
+    this.authService.authenticateUser(user).subscribe(data => {
       if (data.success) {
-        this._authService.storeUserData(data.token, data.user);
-        this._flashMessage.show('Has iniciado Sesion Correctamente', {
+        this.authService.storeUserData(data.token, data.user);
+        this.flashMessage.show('Has iniciado Sesion Correctamente', {
           cssClass: 'alert alert-dismissible alert-success',
           timeout: 5000
         });
-        this._router.navigate(['dashboard']);
+        this.router.navigate(['dashboard']);
       } else {
-        this._flashMessage.show(data.msg, {
+        this.flashMessage.show(data.msg, {
           cssClass: 'alert alert-dismissible alert-danger',
           timeout: 5000
         });
         this.auth = 'isFalse'
-        this._router.navigate(['']);
+        this.router.navigate(['']);
       }
     });
   }
 
   onLogout() {
-    this._router.navigate(['']);
+    this.router.navigate(['']);
   }
-
-
 }

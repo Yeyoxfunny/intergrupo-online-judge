@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { TestService } from '../../services/test.service';
 
 @Component({
   selector: 'app-challenge',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChallengeComponent implements OnInit {
 
-  constructor() { }
+	title: string;
+	exampleHtml: string;
+	language: string;
+	sourceCodeUrl: string;
+	dificulty: string;
 
-  ngOnInit() {
-  }
+	constructor(private testService: TestService,
+					private route: ActivatedRoute) {
+
+	}
+
+	ngOnInit() {
+		this.route.params.subscribe(params => {
+			const id = params['id'];
+			this.testService.getTestById(id).subscribe(response => {
+				this.title = response.title;
+				this.exampleHtml = response.exampleHtml;
+				this.language = response.language;
+				this.sourceCodeUrl = response.sourceCodeUrl;
+				this.dificulty = response.dificulty;
+			});
+		})
+	}
 
 }

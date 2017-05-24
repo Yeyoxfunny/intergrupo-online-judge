@@ -19,11 +19,12 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
 //Services
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
+import { TestService } from './services/test.service';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'home', component: HomeComponent },
-    { path: 'challenge', component: ChallengeComponent },
+    { path: 'challenge/:id', component: ChallengeComponent },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'rank', component: HackrankComponent }
 ]
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
     FlashMessagesModule,
     CKEditorModule 
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
+  providers: [ValidateService, AuthService, TestService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
