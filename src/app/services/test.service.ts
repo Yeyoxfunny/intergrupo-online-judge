@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { Test } from '../model/test';
+import { Test, TestBuilder } from '../model/test';
+import { Language } from '../model/language';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -11,33 +12,38 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class TestService {
 
-	//private testBaseUri = "https://guarded-crag-26034.herokuapp.com/tests/";
-	private testBaseUrl = "http://0de7dc58.ngrok.io/tests/";
+	private testBaseUrl = "https://d96cc3f8.ngrok.io/tests/";
 	private addTestUrl = this.testBaseUrl + "register";
 
 	constructor(private http: Http) { }
 
-	addTest(test){
-		return this.http.post(this.addTestUrl, test)
-							.map(res => res.json());
+	addTest(test: Test){
+		let body = {
+			title: test.title,
+			exampleHtml: test.descriptionHTML,
+			language: JSON.stringify(test.languages),
+			dificulty: test.difficulty 
+		};
+
+		return this.http.post(this.addTestUrl, body)
+							.map(this.extractData)
+							.catch(this.handleError);
 	}
 
-	getAllTests(): Promise<any>{
+	getAllTests(): Observable<Test[]>{
 		return this.http
 						.get(this.testBaseUrl)
-						.toPromise()
-						.then(this.extractData)
-						.then(this.extractTests)
+						.map(this.extractData)
+						.map(this.extractTests)
 						.catch(this.handleError);
 	}
 
-	getTestById(id){
+	getTestById(id: string): Observable<Test>{
 		const uri = this.testBaseUrl + id;
 		return this.http
 						.get(uri)
-						.toPromise()
-						.then(this.extractData)
-						.then(this.extractTest)
+						.map(this.extractData)
+						.map(this.extractTest)
 						.catch(this.handleError);
 	}
 
@@ -47,22 +53,25 @@ export class TestService {
 		}
 		return response.json();
 	}
-	private extractTests(responseData): Test[]{
-		let tests: Test[];
-		responseData.tests.forEach(data => {
-			tests.push(this.convertToTest(data));
-		});
+	private extractTests = (responseData): Test[] => {
+		let tests: Test[] = responseData.tests.map(this.convertToTest);
 		return tests;
 	}
 
-	private extractTest(responseData): Test{
-		return this.convertToTest(responseData);
+	private extractTest = (responseData): Test => {
+		return this.convertToTest(responseData.test);
 	}
 
-	private convertToTest(data): Test{
-		return new Test(data.title, JSON.parse(data.exampleHtml), 
-							data.language, data.sourceCodeUrl, 
-							data.dificulty);
+	private convertToTest = (data): Test => {
+		let languages: Language[] = data.language.map(x => new Language(x.name, x.sourceCodeUrl));
+		let test: Test = new TestBuilder()
+							.setId(data._id)
+							.setTitle(data.title)
+							.setDescriptionHTML(JSON.parse(data.exampleHtml))
+							.setLanguages(languages)
+							.setDifficulty(data.dificulty)
+							.build();
+		return test;
 	}
 
 	private handleError(error: Response | any){
@@ -75,6 +84,6 @@ export class TestService {
 			errMsg = error.message ? error.message : error.toString();
 		}
 		console.error(errMsg);
-		return Promise.reject(errMsg);
+		return Observable.throw(errMsg);
 	}
 }

@@ -20,13 +20,23 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { TestService } from './services/test.service';
+import { RegisterTestComponent } from './components/register-test/register-test.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'challenge/:id', component: ChallengeComponent },
-    { path: 'dashboard', component: DashboardComponent },
-    { path: 'rank', component: HackrankComponent }
+    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+    { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard] },
+    { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+    { 
+      path: 'dashboard', 
+      component: DashboardComponent,
+      children: [
+                  { path: 'register', component: RegisterTestComponent },
+                ]
+    },
+    { path: 'rank', component: HackrankComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
@@ -38,6 +48,8 @@ const appRoutes: Routes = [
     DashboardComponent,
     HackrankComponent,
     ChallengeComponent,
+    RegisterTestComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

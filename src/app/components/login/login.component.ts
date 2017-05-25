@@ -22,7 +22,9 @@ export class LoginComponent implements OnInit {
     private flashMessage: FlashMessagesService) { }
 
   ngOnInit() {
-
+    if(this.authService.loggedIn()){
+      this.router.navigate(['/home']);
+    }
   }
 
   onLoginSubmit() {
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit {
           cssClass: 'alert alert-dismissible alert-success',
           timeout: 5000
         });
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['home']);
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert alert-dismissible alert-danger',

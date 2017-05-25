@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -7,15 +7,15 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">IG Online Judge</a>
+			<a class="navbar-brand" routerLink="/home">IG Online Judge</a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
 			<ul class="nav navbar-nav navbar-right">
 				<li>
-					<a>
+					<a routerLink="/rank">
 						<i class="glyphicon glyphicon-plus"></i>
-						Account
+						Rank
 					</a>
 				</li>
 				<li class="dropdown">
@@ -26,10 +26,11 @@
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">{{ user.email }}</li>
 						<li role="separator" class="divider"></li>
-						<li><a href="#">Perfil</a></li>
+						<li><a [routerLink]="['/profile']">Perfil</a></li>
 						<li><a href="#">Configuración</a></li>
+						<li><a routerLink="/dashboard">Dashboard</a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="#">Salir</a></li>
+						<li><a (click)="onLogoutClick()">Salir</a></li>
 					</ul>
 				</li>
 			</ul>

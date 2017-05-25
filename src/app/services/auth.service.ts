@@ -10,8 +10,9 @@ export class AuthService {
   public user: any;
   private session;
 
-  private userBaseUri = "https://guarded-crag-26034.herokuapp.com/users/";
-  private authUserUri = this.userBaseUri + 'authenticate';
+  private userBaseUrl = "https://d96cc3f8.ngrok.io/users/";
+  private authUserUrl = this.userBaseUrl + 'authenticate';
+  private userInfoUrl = this.authUserUrl + 'profiles';
 
   constructor(private http: Http) {
       
@@ -20,12 +21,12 @@ export class AuthService {
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.authUserUri, user, {headers: headers})
+    return this.http.post(this.authUserUrl, user, {headers: headers})
                     .map(res => res.json());
   }
 
   getAllUsers(){
-    return this.http.get('http://localhost:3000/users/profiles').map(res => res.json());
+    return this.http.get(this.userInfoUrl).map(res => res.json());
   }
 
   storeUserData(token, user){

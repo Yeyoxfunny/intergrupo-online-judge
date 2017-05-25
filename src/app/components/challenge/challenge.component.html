@@ -1,10 +1,12 @@
 <app-navbar></app-navbar>
-<div class="container">
-	<section class="challenge-content">
-		<h3>{{ title }}</h3>
-		<div [innerHTML]="exampleHtml"></div>
+<div class="container navbar-fixed-space">
+	<section class="challenge-content animated bounceInDown">
+		<h3>{{ test.title }}</h3>
+		<div [innerHTML]="test.descriptionHTML"></div>
 	</section>
 	
+	<div class="divider"></div>
+
 	<div class="solution-content">
 		<h4>Subir código como archivo</h4>
 		<div class="row">

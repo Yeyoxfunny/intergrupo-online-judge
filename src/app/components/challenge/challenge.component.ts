@@ -1,4 +1,4 @@
-import { Test } from '../../model/test';
+import { Test, TestBuilder } from '../../model/test';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { TestService } from '../../services/test.service';
 })
 export class ChallengeComponent implements OnInit {
 
-	private test: Test;
+	private test: Test = TestBuilder.getEmptyTest();
 
 	constructor(private testService: TestService,
 					private route: ActivatedRoute) {
@@ -21,7 +21,7 @@ export class ChallengeComponent implements OnInit {
 	ngOnInit() {
 		this.route.params.subscribe(params => {
 			const id = params['id'];
-			this.testService.getTestById(id).then(data => {
+			this.testService.getTestById(id).subscribe(data => {
 				this.test = data;
 			});
 		})
