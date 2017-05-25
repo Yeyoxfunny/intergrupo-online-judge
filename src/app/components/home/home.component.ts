@@ -15,7 +15,10 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		this.testService.getAllTests()
-							.subscribe((response) => {this.Tests = response; console.log(this.Tests)});
+							.then((data) => this.Tests = data)
+							.catch(errorMsg => {
+								this.Tests = [];
+							});
 	}
 
 }

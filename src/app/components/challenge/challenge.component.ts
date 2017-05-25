@@ -1,3 +1,4 @@
+import { Test } from '../../model/test';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,11 +11,7 @@ import { TestService } from '../../services/test.service';
 })
 export class ChallengeComponent implements OnInit {
 
-	title: string;
-	exampleHtml: string;
-	language: string;
-	sourceCodeUrl: string;
-	dificulty: string;
+	private test: Test;
 
 	constructor(private testService: TestService,
 					private route: ActivatedRoute) {
@@ -24,14 +21,9 @@ export class ChallengeComponent implements OnInit {
 	ngOnInit() {
 		this.route.params.subscribe(params => {
 			const id = params['id'];
-			this.testService.getTestById(id).subscribe(response => {
-				this.title = response.title;
-				this.exampleHtml = response.exampleHtml;
-				this.language = response.language;
-				this.sourceCodeUrl = response.sourceCodeUrl;
-				this.dificulty = response.dificulty;
+			this.testService.getTestById(id).then(data => {
+				this.test = data;
 			});
 		})
 	}
-
 }
