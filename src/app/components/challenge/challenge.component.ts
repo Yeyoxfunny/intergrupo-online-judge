@@ -6,8 +6,7 @@ import { TestService } from '../../services/test.service';
 
 @Component({
   selector: 'app-challenge',
-  templateUrl: './challenge.component.html',
-  styleUrls: ['./challenge.component.css']
+  templateUrl: './challenge.component.html'
 })
 export class ChallengeComponent implements OnInit {
 

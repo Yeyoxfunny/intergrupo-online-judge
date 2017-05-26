@@ -12,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class TestService {
 
-	private testBaseUrl = "https://d96cc3f8.ngrok.io/tests/";
+	private testBaseUrl = "http://18b5afa3.ngrok.io/";
 	private addTestUrl = this.testBaseUrl + "register";
 
 	constructor(private http: Http) { }

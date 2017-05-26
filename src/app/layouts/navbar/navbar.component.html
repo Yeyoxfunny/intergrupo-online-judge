@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
@@ -26,7 +26,7 @@
 					<ul class="dropdown-menu">
 						<li class="dropdown-header">{{ user.email }}</li>
 						<li role="separator" class="divider"></li>
-						<li><a [routerLink]="['/profile']">Perfil</a></li>
+						<li><a routerLink="/me">Perfil</a></li>
 						<li><a href="#">Configuración</a></li>
 						<li><a routerLink="/dashboard">Dashboard</a></li>
 						<li role="separator" class="divider"></li>
