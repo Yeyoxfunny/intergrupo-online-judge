@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 //models
 import { Users } from '../../model/users';
+
 @Component({
   selector: 'app-hackrank',
   templateUrl: './hackrank.component.html',

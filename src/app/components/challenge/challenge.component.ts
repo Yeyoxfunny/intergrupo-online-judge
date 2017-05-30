@@ -1,8 +1,8 @@
-import { Test, TestBuilder } from '../../model/test';
+import { Challenge, ChallengeBuilder } from '../../model/challenge';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { TestService } from '../../services/test.service';
+import { ChallengeService } from '../../services/challenge.service';
 
 @Component({
   selector: 'app-challenge',
@@ -10,9 +10,9 @@ import { TestService } from '../../services/test.service';
 })
 export class ChallengeComponent implements OnInit {
 
-	private test: Test = TestBuilder.getEmptyTest();
+	private challenge: Challenge = ChallengeBuilder.getEmptyTest();
 
-	constructor(private testService: TestService,
+	constructor(private challengeService: ChallengeService,
 					private route: ActivatedRoute) {
 
 	}
@@ -20,8 +20,8 @@ export class ChallengeComponent implements OnInit {
 	ngOnInit() {
 		this.route.params.subscribe(params => {
 			const id = params['id'];
-			this.testService.getTestById(id).subscribe(data => {
-				this.test = data;
+			this.challengeService.getById(id).subscribe(data => {
+				this.challenge = data;
 			});
 		})
 	}

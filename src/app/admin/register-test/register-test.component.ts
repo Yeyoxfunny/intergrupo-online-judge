@@ -3,33 +3,32 @@ import { Router } from '@angular/router';
 
 /* Services */
 import { AuthService } from '../../services/auth.service';
-import { TestService } from '../../services/test.service';
+import { ChallengeService } from '../../services/challenge.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 import { Difficulties } from '../../model/difficulty';
 
 /* Models */
-import { Test, TestBuilder } from '../../model/test';
+import { Challenge, ChallengeBuilder } from '../../model/challenge';
 import { Language } from '../../model/language';
 
 @Component({
   selector: 'app-register-test',
-  templateUrl: './register-test.component.html',
-  styleUrls: ['./register-test.component.css']
+  templateUrl: './register-test.component.html'
 })
 
 export class RegisterTestComponent implements OnInit {
 	
 	difficulties: Array<any>;
 	testDescriptionHTML: string;
-	titleTest: string;
+	titleChallenge: string;
 	difficultyIndex: number;
 	supportedLanguages = [{ value: "Java", checked: false},{ value: "C#", checked: false}];
 
 	constructor(
 	 private router: Router,
 	 private authService: AuthService,
-	 private testService: TestService,
+	 private challengeService: ChallengeService,
 	 private flashMessage: FlashMessagesService
 	 ) {
 	}
@@ -44,14 +43,14 @@ export class RegisterTestComponent implements OnInit {
 								.filter(x => x.checked)
 								.map(x =>  new Language(x.value, ""));
 		
-		let test: Test = new TestBuilder()
-								.setTitle(this.titleTest)
+		let challenge: Challenge = new ChallengeBuilder()
+								.setTitle(this.titleChallenge)
 								.setDescriptionHTML(JSON.stringify(this.testDescriptionHTML))
 								.setDifficulty(this.difficulties[this.difficultyIndex])
 								.setLanguages(languages)
 								.build();
 
-	this.testService.addTest(test).subscribe(
+	this.challengeService.add(challenge).subscribe(
 			(response) => {
 				this.router.navigate(['home']);
 			},

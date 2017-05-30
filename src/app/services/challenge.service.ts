@@ -2,27 +2,26 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { Test, TestBuilder } from '../model/test';
+import { Challenge, ChallengeBuilder } from '../model/challenge';
 import { Language } from '../model/language';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class TestService {
+export class ChallengeService {
 
 	private testBaseUrl = "http://18b5afa3.ngrok.io/";
 	private addTestUrl = this.testBaseUrl + "register";
 
 	constructor(private http: Http) { }
 
-	addTest(test: Test){
+	add(challenge: Challenge){
 		let body = {
-			title: test.title,
-			exampleHtml: test.descriptionHTML,
-			language: JSON.stringify(test.languages),
-			dificulty: test.difficulty 
+			title: challenge.title,
+			exampleHtml: challenge.descriptionHTML,
+			language: JSON.stringify(challenge.languages),
+			dificulty: challenge.difficulty 
 		};
 
 		return this.http.post(this.addTestUrl, body)
@@ -30,20 +29,20 @@ export class TestService {
 							.catch(this.handleError);
 	}
 
-	getAllTests(): Observable<Test[]>{
+	getAll(): Observable<Challenge[]>{
 		return this.http
 						.get(this.testBaseUrl)
 						.map(this.extractData)
-						.map(this.extractTests)
+						.map(this.extractChallenges)
 						.catch(this.handleError);
 	}
 
-	getTestById(id: string): Observable<Test>{
+	getById(id: string): Observable<Challenge>{
 		const uri = this.testBaseUrl + id;
 		return this.http
 						.get(uri)
 						.map(this.extractData)
-						.map(this.extractTest)
+						.map(this.extractChallenge)
 						.catch(this.handleError);
 	}
 
@@ -53,25 +52,25 @@ export class TestService {
 		}
 		return response.json();
 	}
-	private extractTests = (responseData): Test[] => {
-		let tests: Test[] = responseData.tests.map(this.convertToTest);
-		return tests;
+	private extractChallenges = (responseData): Challenge[] => {
+		let challenge: Challenge[] = responseData.tests.map(this.convertToChallenge);
+		return challenge;
 	}
 
-	private extractTest = (responseData): Test => {
-		return this.convertToTest(responseData.test);
+	private extractChallenge = (responseData): Challenge => {
+		return this.convertToChallenge(responseData.test);
 	}
 
-	private convertToTest = (data): Test => {
+	private convertToChallenge = (data): Challenge => {
 		let languages: Language[] = data.language.map(x => new Language(x.name, x.sourceCodeUrl));
-		let test: Test = new TestBuilder()
+		let challenge: Challenge = new ChallengeBuilder()
 							.setId(data._id)
 							.setTitle(data.title)
 							.setDescriptionHTML(JSON.parse(data.exampleHtml))
 							.setLanguages(languages)
 							.setDifficulty(data.dificulty)
 							.build();
-		return test;
+		return challenge;
 	}
 
 	private handleError(error: Response | any){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TestService } from '../../services/test.service';
+import { ChallengeService } from '../../services/challenge.service';
+import { Challenge } from '../../model/challenge';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,15 @@ import { TestService } from '../../services/test.service';
 })
 export class HomeComponent implements OnInit {	
 
-	Tests: Array<any>
+	challenges: Array<Challenge>
 
-	constructor(private testService: TestService) { }
+	constructor(private challengeService: ChallengeService) { }
 
 	ngOnInit() {
-		this.testService.getAllTests()
-							.subscribe((data) => this.Tests = data, 
-											errorMsg => this.Tests = []);
+		console.log('Hello')
+		this.challengeService.getAll()
+							.subscribe((data) => this.challenges = data, 
+											errorMsg => this.challenges = []);
 	}
 
 }

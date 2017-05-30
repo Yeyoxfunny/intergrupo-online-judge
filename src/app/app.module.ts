@@ -28,7 +28,7 @@ import { adminRoutes } from './admin/admin.route';
 //Services
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
-import { TestService } from './services/test.service';
+import { ChallengeService } from './services/challenge.service';
 
 const appRoutes: Routes = [
     { path: '', component: LoginComponent },
@@ -57,7 +57,7 @@ const appRoutes: Routes = [
     AdminModule,
     FlashMessagesModule 
   ],
-  providers: [ValidateService, AuthService, TestService, AuthGuard],
+  providers: [ValidateService, AuthService, ChallengeService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

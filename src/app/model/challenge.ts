@@ -1,18 +1,18 @@
 import { Language } from './language';
 
-export class Test {
+export class Challenge {
 	private Id: string
 	private Title: string
 	private DescriptionHTML: string
 	private Languages: Language[]
 	private Difficulty: string
 
-	constructor(testBuilder: TestBuilder){
-		this.Id = testBuilder.Id;
-		this.Title = testBuilder.Title;
-		this.DescriptionHTML = testBuilder.DescriptionHTML;
-		this.Languages = testBuilder.Languages;
-		this.Difficulty = testBuilder.Difficulty;
+	constructor(challengeBuilder: ChallengeBuilder){
+		this.Id = challengeBuilder.Id;
+		this.Title = challengeBuilder.Title;
+		this.DescriptionHTML = challengeBuilder.DescriptionHTML;
+		this.Languages = challengeBuilder.Languages;
+		this.Difficulty = challengeBuilder.Difficulty;
 	}
 
 	get id(){
@@ -36,7 +36,7 @@ export class Test {
 	}
 }
 
-export class TestBuilder{
+export class ChallengeBuilder{
 	private id: string
 	private title: string
 	private descriptionHTML: string
@@ -88,12 +88,12 @@ export class TestBuilder{
 		return this.difficulty;
 	}
 
-	build(): Test{
-		return new Test(this);
+	build(): Challenge{
+		return new Challenge(this);
 	}
 
-	static getEmptyTest(): Test{
-		return new TestBuilder()
+	static getEmptyTest(): Challenge{
+		return new ChallengeBuilder()
 							.setId("")
 							.setTitle("")
 							.setDescriptionHTML("")

@@ -1,18 +1,18 @@
 <app-navbar></app-navbar>
 <div class="container animated bounceIn navbar-fixed-space">
 	<div class="row">
-		<div class="col-sm-6"*ngFor="let test of Tests">
+		<div class="col-sm-6"*ngFor="let challenge of challenges">
 			<div class="panel panel-primary">
 				<div class="panel-body">
-			    	<a class="challenge-title" [routerLink]="['/challenge', test.id]">{{test.title}}</a>
+			    	<a class="challenge-title" [routerLink]="['/challenge', challenge.id]">{{challenge.title}}</a>
 			    	<b>Dificultad:</b>
-			    	<span>{{test.difficulty}}</span>
-			    	<a class="btn btn-success pull-right" [routerLink]="['/challenge', test.id]">Resolver</a>
+			    	<span>{{challenge.difficulty}}</span>
+			    	<a class="btn btn-success pull-right" [routerLink]="['/challenge', challenge.id]">Resolver</a>
 				</div>
 				<div class="panel-footer">
 					<span class="label label-default" 
 							style="margin: 0 .5rem" 
-							*ngFor="let language of test.languages">{{ language.name }}</span>
+							*ngFor="let language of challenge.languages">{{ language.name }}</span>
 				</div>
 			</div>	
 		</div>
