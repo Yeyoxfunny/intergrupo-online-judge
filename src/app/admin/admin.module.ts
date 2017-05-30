@@ -8,6 +8,7 @@ import { LayoutsModule } from '../layouts/layouts.module';
 
 /* External Modules */
 import { CKEditorModule  } from 'ng2-ckeditor';
+import { MaterializeModule } from "angular2-materialize";
 
 /* Own Components */
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -20,6 +21,7 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
     RouterModule,
     FormsModule,
     CKEditorModule,
+    MaterializeModule,
     LayoutsModule
   ],
   declarations: [

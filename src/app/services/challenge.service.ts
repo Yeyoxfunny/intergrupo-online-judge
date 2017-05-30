@@ -5,14 +5,14 @@ import { Observable } from 'rxjs/Rx';
 import { Challenge, ChallengeBuilder } from '../model/challenge';
 import { Language } from '../model/language';
 
+import { AppSettings } from '../app.settings';
+
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ChallengeService {
-
-	private testBaseUrl = "http://18b5afa3.ngrok.io/";
-	private addTestUrl = this.testBaseUrl + "register";
+	private addTestUrl = AppSettings.apiEndPoint + "register";
 
 	constructor(private http: Http) { }
 
@@ -31,14 +31,14 @@ export class ChallengeService {
 
 	getAll(): Observable<Challenge[]>{
 		return this.http
-						.get(this.testBaseUrl)
+						.get(AppSettings.challengeUrl)
 						.map(this.extractData)
 						.map(this.extractChallenges)
 						.catch(this.handleError);
 	}
 
 	getById(id: string): Observable<Challenge>{
-		const uri = this.testBaseUrl + id;
+		const uri = AppSettings.challengeUrl + id;
 		return this.http
 						.get(uri)
 						.map(this.extractData)

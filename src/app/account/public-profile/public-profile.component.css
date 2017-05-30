@@ -1,0 +1,18 @@
+.header{
+	width: 100%;
+	text-align: center;
+	padding: 2em;
+}
+
+.header img{
+	max-height: 160px;
+}
+
+.header h1 {
+	margin: .9em 0 0 0;
+	padding: 0;
+	font-weight: 300;
+	font-size: 1.5em;
+	line-height: 1.4;
+	color: #ffffff;
+}

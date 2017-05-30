@@ -1,16 +1,16 @@
 <app-navbar></app-navbar>
-<div class="container animated bounceIn navbar-fixed-space">
+<div class="container animated bounceIn">
 	<div class="row">
-		<div class="col-sm-6"*ngFor="let challenge of challenges">
-			<div class="panel panel-primary">
-				<div class="panel-body">
+		<div class="col s6" *ngFor="let challenge of challenges">
+			<div class="card">
+				<div class="card-content">
 			    	<a class="challenge-title" [routerLink]="['/challenge', challenge.id]">{{challenge.title}}</a>
 			    	<b>Dificultad:</b>
 			    	<span>{{challenge.difficulty}}</span>
 			    	<a class="btn btn-success pull-right" [routerLink]="['/challenge', challenge.id]">Resolver</a>
 				</div>
-				<div class="panel-footer">
-					<span class="label label-default" 
+				<div class="card-action">
+					<span class="chip" 
 							style="margin: 0 .5rem" 
 							*ngFor="let language of challenge.languages">{{ language.name }}</span>
 				</div>

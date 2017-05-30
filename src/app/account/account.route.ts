@@ -5,5 +5,5 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 
 export const accountRoutes: Routes = [
 						{ path: 'me', component: ProfileComponent },
-						{ path: 'user/:username', component: PublicProfileComponent }
+						{ path: 'user/:id', component: PublicProfileComponent }
 					];

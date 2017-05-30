@@ -1,45 +1,47 @@
-<div class="row">
-	<div class="col-sm-10">
-		<h4>Crear Test</h4>
-	</div>
-	<div class="col-sm-2">
-		<button class="btn btn-success" (click)="onSubmit()">Publicar</button>
-	</div>
-</div>
+<div class="row z-depth-1 m-space">
+	<header class="teal">
+		<span class="white-text title-toolbar">Challenge</span>
+	</header>
 
-<form #formRef="ngForm">
-	<div class="form-group" 
-		[ngClass]="{ 'has-error': !title.pristine && !title.valid }">
-		<label class="control-label" for="test">Título del test</label>
-		<input type="email" class="form-control" id="test" name="title" required 
-		#title="ngModel" 
-		[(ngModel)]="titleChallenge">
-	</div>
+	<div class="row p-space">
+		<form #formRef="ngForm">
+			<div class="input-field col s12">
+				<input type="text" id="test" name="title" required placeholder 
+				#title="ngModel" 
+				[(ngModel)]="titleChallenge">
+				<label for="test">Título del test</label>
+			</div>
 
-	<div class="form-group"
-		[ngClass]="{ 'has-error': !diffi.pristine && !diffi.valid }">
-		<label class="control-label">Dificultad</label>
-		<select class="form-control" name="dificultad" required 
-			#diffi="ngModel" [(ngModel)]="difficultyIndex">
-			<option 
-				*ngFor="let difficulty of difficulties; let i = index;"
-				[ngValue]="i">{{ difficulty }}</option>
-		</select>
-	</div>
+			<div class="input-field col s12">
+				<select materialize="material_select" 
+					[materializeSelectOptions]="difficulties">
+					<option *ngFor="let difficulty of difficulties; let i = index;" 
+					[value]="i">{{difficulty}}</option>
+				</select>
+				<label class="control-label">Dificultad</label>
+			</div>
 
-	<div class="form-group">
-		<label>Lenguajes soportados</label>
-		<div class="checkbox" *ngFor="let language of supportedLanguages">
-			<label>
-				<input type="checkbox" name="supported" [(ngModel)]="language.checked"> {{ language.value }}
-			</label>
+			<div class="col s12">
+				<label>Lenguajes soportados</label>
+				<p *ngFor="let language of supportedLanguages">
+					<input type="checkbox" name="supported" class="filled-in" 
+					id="check-{{ language.value }}"
+					[(ngModel)]="language.checked"/>
+					<label for="check-{{ language.value }}">{{ language.value }}</label>
+				</p>
+			</div>
+		</form>
+
+		<div class="input-field col s12">
+			<ckeditor
+				[config]="{ height: '450px', resize_enabled: false }"
+				[(ngModel)]="testDescriptionHTML"
+				debounce="500">
+			</ckeditor>		
+		</div>
+
+		<div class="input-field col s12">
+			<button type="submit" class="waves-effect waves-light btn">Enviar</button>
 		</div>
 	</div>
-</form>
-<div class="form-group">
-	<ckeditor
-		[config]="{ height: '450px', resize_enabled: false }"
-		[(ngModel)]="testDescriptionHTML"
-		debounce="500">
-	</ckeditor>		
 </div>
