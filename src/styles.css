@@ -21,6 +21,9 @@
 .p-space{
     padding: 1.5rem;
 }
+.p-medium{
+    padding: 3rem;
+}
 .p-half{
     padding: 3.5rem;
 }
@@ -55,6 +58,15 @@
     font-family: Roboto,"Helvetica Neue",sans-serif;
     padding: 16px;
     min-height: 64px;
+}
+
+.title-form{
+    color: #FFFFFF;
+    font-size: 34px;
+    font-weight: normal;
+    padding: 20px 0;
+    text-align: center;
+    text-transform: uppercase;
 }
 
 .promo{

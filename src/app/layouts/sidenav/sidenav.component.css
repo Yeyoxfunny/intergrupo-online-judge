@@ -1,0 +1,10 @@
+.leftside-navigation{
+	top: 64px;
+	overflow: hidden;
+}
+
+@media only screen and (max-width: 600px){
+	.leftside-navigation{
+		top: 57px;
+	}
+}

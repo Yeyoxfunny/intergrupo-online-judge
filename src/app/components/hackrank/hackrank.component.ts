@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 //models
-import { Users } from '../../model/users';
+import { User } from '../../model/user';
 
 @Component({
   selector: 'app-hackrank',
@@ -14,7 +14,7 @@ export class HackrankComponent implements OnInit {
 
   public status: String;
   public errorMessage;
-  public users: Users[];
+  public users: Array<any>;
   public numMayor: number;
   constructor(
     private _authService: AuthService,
