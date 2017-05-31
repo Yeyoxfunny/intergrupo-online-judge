@@ -29,6 +29,10 @@ export class User {
 	get Email(){
 		return this.email;
 	}
+
+	get ImageUrl(){
+		return this.imageUrl;
+	}
 }
 
 export class UserBuilder{

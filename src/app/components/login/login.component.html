@@ -1,32 +1,31 @@
 
 <div class="container">
 	<div class="row">
-			<div class="col s8 center-block remove-float m-big-top">
-		<div class="z-depth-1">
-			<header class="teal">
-				<h3 class="center title-form">Login</h3>
-			</header>
-			<form (submit)="onLoginSubmit()" class="form-horizontal p-half">
-				<div class="row">
-					<div class="input-field col s12">
-						<i class="material-icons prefix">account_circle</i>
-						<input type="text" id="username" class="form-control" [(ngModel)]="username" name="username">
-						<label for="username">Usuario</label>
-					</div>
-
-					<div class="input-field col s12">
-						<i class="material-icons prefix">lock</i>
-						<input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" name="password">
-						<label for="inputPassword">Contraseña</label>
-					</div>
+		<div class="col s8 center-block remove-float m-big-top">
+			<div class="z-depth-1">
+				<header class="indigo darken-4">
+					<h3 class="center title-form">Login</h3>
+				</header>
+				<form (submit)="onLoginSubmit()" class="form-horizontal p-half">
+					<div class="row">
+						<div class="input-field col s12">
+							<i class="material-icons prefix">account_circle</i>
+							<input type="text" id="username" class="form-control" [(ngModel)]="username" name="username">
+							<label for="username">Usuario</label>
+						</div>
 
 						<div class="input-field col s12">
-								<input type="submit" value="Entrar" class="btn btn-primary" style="width: 100%;">
+							<i class="material-icons prefix">lock</i>
+							<input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" name="password">
+							<label for="inputPassword">Contraseña</label>
 						</div>
-					</div>
-			</form>
+
+							<div class="input-field col s12">
+									<input type="submit" value="Entrar" class="btn btn-primary indigo darken-4" style="width: 100%;">
+							</div>
+						</div>
+				</form>
+			</div>
 		</div>
 	</div>
-	</div>
-
 </div>

@@ -4,10 +4,10 @@
 		<div class="col s6" *ngFor="let challenge of challenges">
 			<div class="card">
 				<div class="card-content">
-			    	<a class="challenge-title" [routerLink]="['/challenge', challenge.id]">{{challenge.title}}</a>
+			    	<a class="challenge-title" [routerLink]="['challenge', challenge.id]">{{challenge.title}}</a>
 			    	<b>Dificultad:</b>
 			    	<span>{{challenge.difficulty}}</span>
-			    	<a class="btn btn-success pull-right" [routerLink]="['/challenge', challenge.id]">Resolver</a>
+			    	<a class="btn btn-success indigo darken-4 pull-right" [routerLink]="['challenge', challenge.id]">Resolver</a>
 				</div>
 				<div class="card-action">
 					<span class="chip" 

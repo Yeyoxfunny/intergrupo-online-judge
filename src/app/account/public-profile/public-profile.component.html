@@ -5,9 +5,25 @@
 	<span class="white-text">{{ user.Email }}</span>
 </header>
 <div class="container">
-	<div class="row z-depth-1 m-space">
-		<header class="indigo">
-			<span class="white-text title-toolbar">Información del Usuario</span>
-		</header>
+	<div class="row m-space">
+		<div class="col s12 m7 remove-float center-block">
+				<section class="z-depth-1">
+					<header class="indigo">
+					<span class="white-text title-toolbar">Información del Usuario</span>
+				</header>
+				<section class="p-space">
+					<div class="row">
+						<div class="col s3"><strong>Nombre</strong></div>
+						<div class="col s9">{{ user.Name }}</div>
+
+						<div class="col s3"><strong>Username</strong></div>
+						<div class="col s9">{{ user.UserName }}</div>
+
+						<div class="col s3"><strong>Email</strong></div>
+						<div class="col s9">{{ user.Email }}</div>
+					</div>
+				</section>
+			</section>
+		</div>
 	</div>
 </div>

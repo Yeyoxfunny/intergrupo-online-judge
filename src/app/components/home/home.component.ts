@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
 	constructor(private challengeService: ChallengeService) { }
 
 	ngOnInit() {
-		console.log('Hello')
 		this.challengeService.getAll()
 							.subscribe((data) => this.challenges = data, 
 											errorMsg => this.challenges = []);

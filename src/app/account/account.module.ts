@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { LayoutsModule } from '../layouts/layouts.module';
 
@@ -11,7 +12,8 @@ import { UsersService } from '../services/users.service';
 @NgModule({
   imports: [
     CommonModule,
-    LayoutsModule
+    LayoutsModule,
+    FormsModule
   ],
   declarations: [
   		ProfileComponent,

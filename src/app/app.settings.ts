@@ -1,5 +1,5 @@
 export class AppSettings{
-	public static apiEndPoint = "https://4ea43361.ngrok.io/";
+	public static apiEndPoint = "https://0888bd67.ngrok.io/";
 	
 	/* Challenge Settings */
 	public static challengeUrl = AppSettings.apiEndPoint + "challenge/";

@@ -1,6 +1,46 @@
 <app-navbar></app-navbar>
-<header class="header indigo z-depth-1">
-	<img src="assets/skrollex.png" class="circle responsive-img">
-	<h1>{{ user.name }}</h1>
-	<span>{{ user.email }}</span>
+<header class="header indigo z-depth-1 animated fadeIn">
+	<div class="profile-image">
+		<img src="{{ imageUrl }}" class="circle responsive-img center-block">
+		<label for="file-picker" class="btn-floating btn-large waves-effect waves-light indigo darken-4">
+			<i class="material-icons">attach_file</i>
+		</label>
+		<input type="file" id="file-picker" (change)="fileChangeEvent($event)" style="display: none;">
+	</div>
+	<h1>{{ name }}</h1>
+	<span style="display: block;" class="white-text m-bottom">{{ email }}</span>
+	<a class="waves-effect waves-light btn indigo darken-4">Guardar Cambios</a>
 </header>
+
+<div class="container animated fadeIn">
+	<div class="row m-space">
+		<div class="col s12 m8 remove-float center-block">
+			<section class="z-depth-1">
+				<header class="indigo">
+					<span class="white-text title-toolbar">Mi Perfil</span>
+				</header>
+
+				<form class="p-space">
+					<div class="row">
+						<div class="input-field col s12 m6">
+							<input type="text" placeholder id="first_name" name="first_name" [(ngModel)]="firstName">
+							<label for="first_name">Primer Nombre</label>
+						</div>
+						<div class="input-field col s12 m6">
+							<input type="text" id="last_name" name="last_name" placeholder [(ngModel)]="firstLastName">
+							<label for="last_name">Primer Apellido</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="text" id="username" name="username" placeholder [(ngModel)]="username">
+							<label for="username">Nombre de Usuario</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="email" id="email" name="email" placeholder [(ngModel)]="email">
+							<label for="email">Email</label>
+						</div>
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+</div>

@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+
+
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+
+import { User, UserBuilder } from '../model/user';
+
 
 @Injectable()
 export class AuthService {
@@ -36,8 +41,19 @@ export class AuthService {
     this.user = user;
   }
 
-  getStoredUserData(){
-    return JSON.parse(localStorage.getItem('user'));
+  getStoredUserData(): User{
+    let storedUser = JSON.parse(localStorage.getItem('user'));
+    return this.convertToUser(storedUser);
+  }
+
+  convertToUser(storedUser): User{
+    let user: User = new UserBuilder()
+                            .setId(storedUser.id)
+                            .setName(storedUser.name)
+                            .setUserName(storedUser.username)
+                            .setEmail(storedUser.email)
+                            .build();
+    return user;
   }
 
   logout(){

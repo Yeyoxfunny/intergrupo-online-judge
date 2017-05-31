@@ -4,8 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-
+/* External Module */
 import { FlashMessagesModule } from 'angular2-flash-messages';
+import { MaterializeModule } from 'angular2-materialize';
+
 import { AuthGuard } from './guards/auth.guard';
 
 /* Own Modules */
@@ -13,31 +15,20 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { AccountModule } from './account/account.module';
 import { AdminModule } from './admin/admin.module';
 
-//Owns Components
+/* Own Components */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
-
 import { HackrankComponent } from './components/hackrank/hackrank.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 
-/* App Routes */
-import { accountRoutes } from './account/account.route';
-import { adminRoutes } from './admin/admin.route';
-
-//Services
+/* Services */
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { ChallengeService } from './services/challenge.service';
 
-const appRoutes: Routes = [
-    { path: '', component: LoginComponent },
-    ...accountRoutes,
-    ...adminRoutes,
-    { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
-    { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard] },
-    { path: 'rank', component: HackrankComponent, canActivate: [AuthGuard] }
-]
+/* App Routes */
+import { appRoutes } from './app.route';
 
 @NgModule({
   declarations: [
@@ -55,7 +46,8 @@ const appRoutes: Routes = [
     LayoutsModule,
     AccountModule,
     AdminModule,
-    FlashMessagesModule 
+    FlashMessagesModule,
+    MaterializeModule 
   ],
   providers: [ValidateService, AuthService, ChallengeService, AuthGuard],
   bootstrap: [AppComponent]
