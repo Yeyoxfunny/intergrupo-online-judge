@@ -26,9 +26,10 @@ import { ChallengeComponent } from './components/challenge/challenge.component';
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { ChallengeService } from './services/challenge.service';
-
+import { UploadService } from './services/upload.service';
 /* App Routes */
 import { appRoutes } from './app.route';
+
 
 @NgModule({
   declarations: [
@@ -49,7 +50,7 @@ import { appRoutes } from './app.route';
     FlashMessagesModule,
     MaterializeModule 
   ],
-  providers: [ValidateService, AuthService, ChallengeService, AuthGuard],
+  providers: [ValidateService, AuthService, ChallengeService, AuthGuard, UploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

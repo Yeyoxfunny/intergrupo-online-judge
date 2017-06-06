@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
           cssClass: 'alert alert-dismissible alert-success',
           timeout: 5000
         });
-        this.router.navigate(['home']);
+        this.router.navigate(['app']);
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: 'alert alert-dismissible alert-danger',

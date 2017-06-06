@@ -15,9 +15,9 @@ export class AuthService {
   public user: any;
   private session;
 
-  private userBaseUrl = "https://d96cc3f8.ngrok.io/users/";
+  private userBaseUrl = "http://localhost:3000/users/";
   private authUserUrl = this.userBaseUrl + 'authenticate';
-  private userInfoUrl = this.authUserUrl + 'profiles';
+  //private userInfoUrl = this.authUserUrl + 'profiles';
 
   constructor(private http: Http) {
       
@@ -31,7 +31,7 @@ export class AuthService {
   }
 
   getAllUsers(){
-    return this.http.get(this.userInfoUrl).map(res => res.json());
+    return this.http.get(this.userBaseUrl).map(res => res.json());
   }
 
   storeUserData(token, user){

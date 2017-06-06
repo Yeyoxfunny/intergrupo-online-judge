@@ -1,15 +1,16 @@
 <app-navbar></app-navbar>
 <header class="header indigo z-depth-1 animated fadeIn">
 	<div class="profile-image">
-		<img src="{{ imageUrl }}" class="circle responsive-img center-block">
+		<img *ngIf="imageUrl !== undefined" src="{{ imageUrl }}" class="circle responsive-img center-block">
+		<img *ngIf="imageUrl === undefined" src="http://localhost:3000/uploads/avatars/avatar-default.png" class="circle responsive-img center-block">
 		<label for="file-picker" class="btn-floating btn-large waves-effect waves-light indigo darken-4">
 			<i class="material-icons">attach_file</i>
 		</label>
-		<input type="file" id="file-picker" (change)="fileChangeEvent($event)" style="display: none;">
+		<input type="file" id="file-picker" (change)="fileChangeEvent($event)" style="display: none;" >
 	</div>
 	<h1>{{ name }}</h1>
 	<span style="display: block;" class="white-text m-bottom">{{ email }}</span>
-	<a class="waves-effect waves-light btn indigo darken-4">Guardar Cambios</a>
+	<a class="waves-effect waves-light btn indigo darken-4" (click)="uploadImage()">Guardar Cambios</a>
 </header>
 
 <div class="container animated fadeIn">
