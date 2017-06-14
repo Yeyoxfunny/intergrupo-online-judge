@@ -13,20 +13,23 @@ export class UsersService {
 
 	constructor(private http: Http) { }
 
-	getById(id: string): Observable<User>{
+	getById(id: string){
 		const url = AppSettings.userUrl + id;
-
+		let headers = new Headers();
+		headers.append('Content-Type', 'application/json');
+		console.log("URL: "+url);
 		return this.http.get(url)
 					.map(this.extractData)
 					.map(this.extractUser)
 					.catch(this.handleError);
+		//return this.http.get(url).map(res => res.json());
 	}
 
 	private extractData = (response: Response) => {
 		if(response.status !== 200){
 			throw response;
 		}
-
+		//console.log(response.json());
 		return response.json();
 	}
 

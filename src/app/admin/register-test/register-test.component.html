@@ -1,47 +1,41 @@
 <div class="row z-depth-1 m-space">
-	<header class="teal">
-		<span class="white-text title-toolbar indigo">Challenge</span>
-	</header>
+  <header class="teal">
+    <span class="white-text title-toolbar indigo">Challenge</span>
+  </header>
 
-	<div class="row p-space">
-		<form #formRef="ngForm">
-			<div class="input-field col s12">
-				<input type="text" id="test" name="title" required placeholder 
-				#title="ngModel" 
-				[(ngModel)]="titleChallenge">
-				<label for="test">Título del test</label>
-			</div>
+  <div class="row p-space">
+    <form #challengeForm="ngForm">
+      <div class="input-field col s12">
+        <input type="text" id="test" name="title" required placeholder #title="ngModel"  [(ngModel)]="titleChallenge">
+        <label for="test">Título del test</label>
+      </div>
 
-			<div class="input-field col s12">
-				<select materialize="material_select" 
-					[materializeSelectOptions]="difficulties">
+      <div class="input-field col s12">
+        <select  #difficulty materialize="material_select" [materializeSelectOptions]="difficulties" (change)="optionChange(difficulty.value)" >
 					<option *ngFor="let difficulty of difficulties; let i = index;" 
 					[value]="i">{{difficulty}}</option>
 				</select>
-				<label class="control-label">Dificultad</label>
-			</div>
+        <label class="control-label">Dificultad</label>
+      </div>
 
-			<div class="col s12">
-				<label>Lenguajes soportados</label>
-				<p *ngFor="let language of supportedLanguages">
-					<input type="checkbox" name="supported" class="filled-in" 
-					id="check-{{ language.value }}"
-					[(ngModel)]="language.checked"/>
-					<label for="check-{{ language.value }}">{{ language.value }}</label>
-				</p>
-			</div>
-		</form>
+      <div class="col s12">
+        <label>Lenguajes soportados</label>
+        <p *ngFor="let language of supportedLanguages">
+          <input type="checkbox" name="supported" class="filled-in" id="check-{{ language.value }}" [(ngModel)]="language.checked"
+            (change)="onSelect(language.checked ,language.value)" />
+          <label for="check-{{ language.value }}">{{ language.value }}</label>
+		  <input type="file" multiple id="test" name="title" *ngIf="language.checked" (change)="fileChangeEvent($event)" >
+        </p>
+      </div>
+    </form>
 
-		<div class="input-field col s12">
-			<ckeditor
-				[config]="{ height: '450px', resize_enabled: false }"
-				[(ngModel)]="testDescriptionHTML"
-				debounce="500">
-			</ckeditor>		
-		</div>
+    <div class="input-field col s12">
+      <ckeditor [config]="{ height: '450px', resize_enabled: false }" [(ngModel)]="testDescriptionHTML" debounce="500">
+      </ckeditor>
+    </div>
 
-		<div class="input-field col s12">
-			<button type="submit" class="waves-effect waves-light btn indigo">Enviar</button>
-		</div>
-	</div>
+    <div class="input-field col s12">
+      <button type="submit" class="waves-effect waves-light btn indigo" (click)="onSubmit()" >Enviar</button>
+    </div>
+  </div>
 </div>

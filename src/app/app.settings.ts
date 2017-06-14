@@ -6,4 +6,6 @@ export class AppSettings{
 
 	/* User Settings */
 	public static userUrl = AppSettings.apiEndPoint + "users/";
+
+	public static authUrl = AppSettings.apiEndPoint + "auth/";
 }

@@ -20,11 +20,11 @@ export class ChallengeService {
 		let body = {
 			title: challenge.title,
 			exampleHtml: challenge.descriptionHTML,
-			language: JSON.stringify(challenge.languages),
+			language: challenge.languages,
 			dificulty: challenge.difficulty 
 		};
 
-		return this.http.post(this.addTestUrl, body)
+		return this.http.post(AppSettings.challengeUrl, body)
 							.map(this.extractData)
 							.catch(this.handleError);
 	}
@@ -83,6 +83,7 @@ export class ChallengeService {
 			errMsg = error.message ? error.message : error.toString();
 		}
 		console.error(errMsg);
+		console.log(error);
 		return Observable.throw(errMsg);
 	}
 }

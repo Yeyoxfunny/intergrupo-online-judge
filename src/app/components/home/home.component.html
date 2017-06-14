@@ -1,4 +1,14 @@
 <app-navbar></app-navbar>
+<div class="fixed-action-btn toolbar">
+  <a id="menu" class="btn-floating btn-large red">
+    <i class="material-icons">filter_list</i>
+  </a>
+  <ul>
+    <li class="waves-effect waves-light"><a #easy  (click)="filterByDifficulty(easy.text)">Facil</a></li>
+    <li class="waves-effect waves-light"><a #medium  (click)="filterByDifficulty(medium.text)">Medio</a></li>
+	<li class="waves-effect waves-light"><a #hard  (click)="filterByDifficulty(hard.text)">Dificil</a></li>
+  </ul>
+</div>
 <div class="container animated bounceIn">
 	<div class="row">
 		<div class="col s6" *ngFor="let challenge of challenges">

@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { User } from '../../model/user';
 import { FileUploader } from 'ng2-file-upload';
 import { UploadService } from '../../services/upload.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
 	selector: 'app-profile',
@@ -11,7 +12,6 @@ import { UploadService } from '../../services/upload.service';
 	styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-
 	private id: string;
 	private name: string;
 	private firstName: string;
@@ -19,12 +19,13 @@ export class ProfileComponent implements OnInit {
 	private username: string;
 	private email: string;
 	private imageUrl: any;
-	private fileOutput: any;
+	private fileToUpload: any;
 	acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
 
 	constructor(
 		private authService: AuthService,
-		private uploadService: UploadService
+		private uploadService: UploadService,
+		private userService: UsersService
 	) {
 
 	}
@@ -42,15 +43,21 @@ export class ProfileComponent implements OnInit {
 
 	fileChangeEvent(fileInput) {
 		let file = fileInput.target.files[0];
+		console.log(file);
 		let isValidFile: boolean = this.acceptFileTypes.test(file.type);
+		console.log(file.type.split('/')[1]);
+		let params = {
+			_id: JSON.parse(localStorage.getItem('user')).id
+		}
 
 		if (!isValidFile) {
 			console.error('This is not a valid file')
 			return;
 		}
-		//this.fileOutput = file;
+
+		this.fileToUpload = fileInput.target.files;
 		this.renderImageFromFile(file);
-		this.uploadImage(file, 'http://localhost:3000/upload/image');
+		this.uploadService.makeFileRequest(this.fileToUpload, 'http://localhost:3000/upload/image', params);
 	}
 
 	renderImageFromFile(file: File) {
@@ -60,11 +67,4 @@ export class ProfileComponent implements OnInit {
 		reader.onerror = console.error;
 	}
 
-	uploadImage(file, url){
-		this.uploadService.makeFileRequest(file, url).then(
-			result => {this.fileOutput = result,console.log(this.fileOutput)}
-			
-		)
-	}
-	
 }

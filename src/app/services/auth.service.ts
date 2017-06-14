@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
 
 import { User, UserBuilder } from '../model/user';
+import { AppSettings } from '../app.settings';
 
 
 @Injectable()
@@ -15,8 +16,8 @@ export class AuthService {
   public user: any;
   private session;
 
-  private userBaseUrl = "http://localhost:3000/users/";
-  private authUserUrl = this.userBaseUrl + 'authenticate';
+  private userBaseUrl = "http://localhost:3000/";
+  private authUserUrl = AppSettings.authUrl + "authenticate";
   //private userInfoUrl = this.authUserUrl + 'profiles';
 
   constructor(private http: Http) {

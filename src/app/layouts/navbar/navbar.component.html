@@ -5,7 +5,7 @@
       <a materialize="sideNav" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
       
       <ul class="right hide-on-med-and-down">
-        <li>
+        <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a routerLink="/app/rank">
               Rank
           </a>
