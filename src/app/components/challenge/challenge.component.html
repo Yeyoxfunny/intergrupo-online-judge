@@ -1,8 +1,14 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <section class="challenge-content animated bounceInLeft">
-    <h3>{{ challenge.title }}</h3>
-    <div [innerHTML]="challenge.descriptionHTML"></div>
+  <section class="challenge-content animated bounceInLeft z-depth-2 p-space m-top">
+    <header>
+      <a href="">Descargar archivos</a>
+      <a href="">Enviar solución</a>
+    </header>
+    <section>
+      <h3 class="center">{{ challenge.title }}</h3>
+      <div [innerHTML]="challenge.descriptionHTML"></div>  
+    </section>
   </section>
 
   <div class="solution-content row z-depth-1">

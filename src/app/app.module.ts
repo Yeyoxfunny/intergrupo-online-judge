@@ -21,6 +21,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { HackrankComponent } from './components/hackrank/hackrank.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
+import { DownloadModalComponent } from './components/challenge/download-modal/download-modal.component';
+import { SubmitModalComponent } from './components/challenge/submit-modal/submit-modal.component';
 
 /* Services */
 import { ValidateService } from './services/validate.service';
@@ -37,7 +39,9 @@ import { appRoutes } from './app.route';
     LoginComponent,
     HomeComponent,
     HackrankComponent,
-    ChallengeComponent
+    ChallengeComponent,
+    DownloadModalComponent,
+    SubmitModalComponent
   ],
   imports: [
     BrowserModule,

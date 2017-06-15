@@ -7,34 +7,29 @@ import { AppSettings } from '../app.settings';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
 @Injectable()
 export class UsersService {
 
 	constructor(private http: Http) { }
 
-	getById(id: string) {
+	getById(id: string): Observable<User> {
 		const url = AppSettings.userUrl + id;
-		let headers = new Headers();
-		headers.append('Content-Type', 'application/json');
-		console.log("URL: " + url);
+
 		return this.http.get(url)
 			.map(this.extractData)
 			.map(this.extractUser)
 			.catch(this.handleError);
-		//return this.http.get(url).map(res => res.json());
 	}
 
-	private extractData = (response: Response) => {
+	private extractData = (response) => {
 		if (response.status !== 200) {
 			throw response;
 		}
-		//console.log(response.json());
 		return response.json();
 	}
 
 	private extractUser = (responseData): User => {
-		return this.convertToUser(responseData);
+		return this.convertToUser(responseData.user);
 	}
 
 	private convertToUser = (data): User => {
@@ -61,5 +56,4 @@ export class UsersService {
 		console.error(errMsg);
 		return Observable.throw(errMsg);
 	}
-
 }

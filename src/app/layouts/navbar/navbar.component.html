@@ -13,7 +13,7 @@
         <!-- Dropdown Trigger -->
         <li>
         	 <a materialize="dropdown" class="dropdown-button" data-activates="dropdown1">
-    			   <img src="assets/skrollex.png" class="profile-img circle">
+    			   <img [src]="user.imageUrl? user.imageUrl : 'assets/avatar-default.png'" class="profile-img circle">
           	 {{ user.username }}<i class="material-icons right">arrow_drop_down</i>
            </a>
         </li>

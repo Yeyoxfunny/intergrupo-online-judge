@@ -1,19 +1,22 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
+/* External libraries */
+import * as Materialize from "angular2-materialize";
+import { FlashMessagesService } from 'angular2-flash-messages';
+
+/* Settings */
+import { AppSettings } from '../../app.settings';
+
 /* Services */
 import { AuthService } from '../../services/auth.service';
 import { ChallengeService } from '../../services/challenge.service';
-import { FlashMessagesService } from 'angular2-flash-messages';
-import { MaterializeDirective } from "angular2-materialize";
-import * as Materialize from "angular2-materialize";
-
-import { Difficulties } from '../../model/difficulty';
+import { UploadService } from '../../services/upload.service';
 
 /* Models */
 import { Challenge, ChallengeBuilder } from '../../model/challenge';
 import { Language } from '../../model/language';
-import { UploadService } from '../../services/upload.service';
+import { Difficulties } from '../../model/difficulty';
 
 @Component({
 	selector: 'app-register-test',
@@ -56,7 +59,7 @@ export class RegisterTestComponent implements OnInit {
 
 		this.challengeService.add(challenge).subscribe(
 			(response) => {
-				this.uploadsService.makeFileRequest(this.filesToUpload, 'http://localhost:3001/api/upload/file', params);
+				this.uploadsService.makeFileRequest(this.filesToUpload, AppSettings.filesChallengeUrl, params);
 				this.router.navigate(['app']);
 			},
 			(error) => {

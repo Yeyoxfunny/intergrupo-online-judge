@@ -56,6 +56,17 @@ export class AuthService {
     return user;
   }
 
+  updateStoreUserData(user: User){
+    let storeUser = JSON.parse(localStorage.getItem('user'));
+    storeUser.id = user.Id;
+    storeUser.name = user.Name;
+    storeUser.username = user.UserName;
+    storeUser.email = user.Email;
+    storeUser.imageUrl = user.ImageUrl;
+
+    localStorage.setItem('user', JSON.stringify(storeUser));
+  }
+
   logout(){
     this.authToken = null;
     this.user = null;

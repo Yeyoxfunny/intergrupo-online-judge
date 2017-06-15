@@ -21,6 +21,9 @@
     margin-top: 3rem;
     margin-bottom: 3rem;
 }
+.remove-margin{
+    margin: 0 !important;
+}
 .p-space{
     padding: 1.5rem;
 }
@@ -48,6 +51,10 @@
     height: 1px;
     overflow: hidden;
     background-color: #e0e0e0;
+}
+
+.convert-block{
+    display: block;
 }
 
 .bg-bluewood{
@@ -88,3 +95,13 @@
     margin-top: 5px;
     margin-bottom: 0;
 }
+
+
+.container-fluid {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+

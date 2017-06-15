@@ -1,16 +1,23 @@
 <app-navbar></app-navbar>
 <header class="header indigo z-depth-1 animated fadeIn">
 	<div class="profile-image">
-		<img *ngIf="imageUrl !== undefined" src="{{ imageUrl }}" class="circle responsive-img center-block">
-		<img *ngIf="imageUrl === undefined" src="http://localhost:3000/avatars/avatar-default.png" class="circle responsive-img center-block">
+		<img [src]="imageUrl? imageUrl : 'assets/avatar-default.png'" class="circle responsive-img center-block">
 		<label for="file-picker" class="btn-floating btn-large waves-effect waves-light indigo darken-4">
 			<i class="material-icons">attach_file</i>
 		</label>
 		<input type="file" id="file-picker" (change)="fileChangeEvent($event)" style="display: none;" >
 	</div>
+	<div class="profile-actions m-top animated fadeInDown" *ngIf="!!fileToUpload">
+		<a class="waves-effect waves-light btn amber accent-3">
+			<i class="material-icons left remove-margin" (click)="saveImage()">done</i>
+		</a>
+		<a class="waves-effect waves-light btn red accent-2" (click)="cancelUpload()">
+			<i class="material-icons left remove-margin">close</i>
+		</a>
+	</div>
+
 	<h1>{{ name }}</h1>
 	<span style="display: block;" class="white-text m-bottom">{{ email }}</span>
-	<a class="waves-effect waves-light btn indigo darken-4" (click)="uploadImage()">Guardar Cambios</a>
 </header>
 
 <div class="container animated fadeIn">
@@ -38,6 +45,10 @@
 						<div class="input-field col s12">
 							<input type="email" id="email" name="email" placeholder [(ngModel)]="email">
 							<label for="email">Email</label>
+						</div>
+
+						<div class="input-field col s12">
+							<button class="waves-effect waves-light btn indigo darken-4 convert-block center-block">Guardar cambios</button>
 						</div>
 					</div>
 				</form>

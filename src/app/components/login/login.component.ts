@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit {
     if(this.authService.loggedIn()){
       this.router.navigate(['/app']);
     }
+
+    console.log('Hello world')
   }
 
   onLoginSubmit() {
@@ -32,8 +34,9 @@ export class LoginComponent implements OnInit {
       username: this.username,
       password: this.password
     }
-
+    console.log(user)
     this.authService.authenticateUser(user).subscribe(data => {
+      console.log(data);
       if (data.success) {
         this.authService.storeUserData(data.token, data.user);
         this.flashMessage.show('Has iniciado Sesion Correctamente', {

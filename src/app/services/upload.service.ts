@@ -12,7 +12,6 @@ export class UploadService {
 			let xhr: XMLHttpRequest = new XMLHttpRequest();
 
 			for(let i = 0; i < files.length; i++){
-				console.log(files);
 				formData.append("uploads[]", files[i], files[i].name);	
 			}
 			if (params.titulo) {
@@ -26,10 +25,8 @@ export class UploadService {
 			xhr.onreadystatechange = function() {
 				if(xhr.readyState === 4){
 					if(xhr.status !== 200){
-						console.log(xhr.status);
 						return reject(xhr.response);
 					}
-					console.log(xhr.response);
 					resolve(xhr.response);
 				}
 			}
