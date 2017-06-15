@@ -16,7 +16,6 @@ export class AuthService {
   public user: any;
   private session;
 
-  private userBaseUrl = "http://localhost:3000/";
   private authUserUrl = AppSettings.authUrl + "authenticate";
   //private userInfoUrl = this.authUserUrl + 'profiles';
 
@@ -32,7 +31,7 @@ export class AuthService {
   }
 
   getAllUsers(){
-    return this.http.get(this.userBaseUrl).map(res => res.json());
+    return this.http.get(AppSettings.userUrl).map(res => res.json());
   }
 
   storeUserData(token, user){

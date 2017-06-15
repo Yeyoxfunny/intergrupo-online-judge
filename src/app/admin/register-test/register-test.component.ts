@@ -26,7 +26,8 @@ export class RegisterTestComponent implements OnInit {
 	testDescriptionHTML: string;
 	titleChallenge: string;
 	difficultyIndex: number = 0;
-	supportedLanguages = [{ value: "Java", checked: false }, { value: "C#", checked: false }];
+	supportedLanguages = [{ value: "Java", checked: false, file: undefined }, { value: "C#", checked: false, file: undefined }];
+	languages;
 	filesToUpload: File[] = [];
 	files;
 	constructor(
@@ -35,8 +36,7 @@ export class RegisterTestComponent implements OnInit {
 		private challengeService: ChallengeService,
 		private flashMessage: FlashMessagesService,
 		private uploadsService: UploadService
-	) {
-	}
+	) { }
 
 	ngOnInit() {
 		this.difficulties = Difficulties;
@@ -44,25 +44,19 @@ export class RegisterTestComponent implements OnInit {
 
 	onSubmit() {
 		let params = {
-			titulo: this.titleChallenge.split(" ").join("+")
+			titulo: this.titleChallenge.split(" ").join("-")
 		}
-
-		let languages: Language[] = this
-			.supportedLanguages
-			.filter(x => x.checked)
-			.map(x => new Language(x.value, `${this.titleChallenge.split(" ").join("+")}/${this.filesToUpload[0].name}`));
 
 		let challenge: Challenge = new ChallengeBuilder()
 			.setTitle(this.titleChallenge)
 			.setDescriptionHTML(JSON.stringify(this.testDescriptionHTML))
 			.setDifficulty(this.difficulties[this.difficultyIndex])
-			.setLanguages(languages)
+			.setLanguages(this.languages)
 			.build();
 
-		console.log(challenge);
 		this.challengeService.add(challenge).subscribe(
 			(response) => {
-				this.uploadsService.makeFileRequest(this.filesToUpload, 'http://localhost:3000/upload/file', params);
+				this.uploadsService.makeFileRequest(this.filesToUpload, 'http://localhost:3001/api/upload/file', params);
 				this.router.navigate(['app']);
 			},
 			(error) => {
@@ -86,22 +80,16 @@ export class RegisterTestComponent implements OnInit {
 		let file = fileInput.target.files[0];
 		this.filesToUpload.push(file);
 		console.log(this.filesToUpload);
-		let name;
-		this.filesToUpload.forEach(element => {
-			console.log(this.titleChallenge.split(" ").join("%") + "/" + element.name + " " + this.value);
-		});
-		//
+		console.log(this.value);
 		this.filesToUpload.forEach((x, i) => this.files = this.filesToUpload[i].name);
-		let languages: Language[] = this
+
+		this.languages = this
 			.supportedLanguages
 			.filter(x => x.checked)
-			.map(x => new Language(x.value, `${this.titleChallenge.split(" ").join("%")}/${this.files}`));
-
-		console.log(languages);
+			.map(x => new Language(x.value, `${this.titleChallenge.split(" ").join("-")}/${x.value === 'Java' ? this.filesToUpload[0].name || this.filesToUpload[1].name : x.value === 'C#' && this.filesToUpload[1] === undefined ? this.filesToUpload[0].name : this.filesToUpload[1].name}`));
 	}
 
 	optionChange(value) {
 		this.difficultyIndex = value;
-		//console.log(value);
 	}
 }

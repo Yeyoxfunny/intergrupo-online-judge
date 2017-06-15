@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
 
 		this.fileToUpload = fileInput.target.files;
 		this.renderImageFromFile(file);
-		this.uploadService.makeFileRequest(this.fileToUpload, 'http://localhost:3000/upload/image', params);
+		this.uploadService.makeFileRequest(this.fileToUpload, 'http://localhost:3001/api/upload/image', params);
 	}
 
 	renderImageFromFile(file: File) {

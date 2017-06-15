@@ -13,20 +13,20 @@ export class UsersService {
 
 	constructor(private http: Http) { }
 
-	getById(id: string){
+	getById(id: string) {
 		const url = AppSettings.userUrl + id;
 		let headers = new Headers();
 		headers.append('Content-Type', 'application/json');
-		console.log("URL: "+url);
+		console.log("URL: " + url);
 		return this.http.get(url)
-					.map(this.extractData)
-					.map(this.extractUser)
-					.catch(this.handleError);
+			.map(this.extractData)
+			.map(this.extractUser)
+			.catch(this.handleError);
 		//return this.http.get(url).map(res => res.json());
 	}
 
 	private extractData = (response: Response) => {
-		if(response.status !== 200){
+		if (response.status !== 200) {
 			throw response;
 		}
 		//console.log(response.json());
@@ -39,23 +39,23 @@ export class UsersService {
 
 	private convertToUser = (data): User => {
 		let user: User = new UserBuilder()
-									.setId(data._id)
-									.setName(data.name)
-									.setUserName(data.username)
-									.setEmail(data.email)
-									.setImageUrl(data.imageUrl)
-									.build();
+			.setId(data._id)
+			.setName(data.name)
+			.setUserName(data.username)
+			.setEmail(data.email)
+			.setImageUrl(data.imageUrl)
+			.build();
 
 		return user;
 	}
 
-	private handleError(error: Response | any){
+	private handleError(error: Response | any) {
 		let errMsg: string;
-		if(error instanceof Response){
+		if (error instanceof Response) {
 			const body = error.json() || '';
 			const err = body.msg || JSON.stringify(body);
 			errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-		} else{
+		} else {
 			errMsg = error.message ? error.message : error.toString();
 		}
 		console.error(errMsg);

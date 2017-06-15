@@ -24,7 +24,7 @@
           <input type="checkbox" name="supported" class="filled-in" id="check-{{ language.value }}" [(ngModel)]="language.checked"
             (change)="onSelect(language.checked ,language.value)" />
           <label for="check-{{ language.value }}">{{ language.value }}</label>
-		  <input type="file" multiple id="test" name="title" *ngIf="language.checked" (change)="fileChangeEvent($event)" >
+		  <input type="file" id="test" name="title" *ngIf="language.checked" (change)="fileChangeEvent($event)" >
         </p>
       </div>
     </form>

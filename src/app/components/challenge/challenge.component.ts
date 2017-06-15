@@ -13,7 +13,8 @@ export class ChallengeComponent implements OnInit {
 	private challenge: Challenge = ChallengeBuilder.getEmptyTest();
 	private languages: string[] = ["Java", "C#"];
 
-	constructor(private challengeService: ChallengeService,
+	constructor(
+		private challengeService: ChallengeService,
 		private route: ActivatedRoute) {
 
 	}
@@ -26,6 +27,10 @@ export class ChallengeComponent implements OnInit {
 				console.log(data);
 			});
 		})
+	}
+
+	getFile(link){
+
 	}
 
 	
