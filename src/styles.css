@@ -96,12 +96,17 @@
     margin-bottom: 0;
 }
 
-
-.container-fluid {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+.cursor-pointer{
+    cursor: pointer;
 }
 
+
+.alert-error{
+    width: 100%;
+    color: #FFF;
+    background-color: #EF5350;
+    display: block;
+    position: fixed;
+    top: 0;
+    font-weight: bold;
+}

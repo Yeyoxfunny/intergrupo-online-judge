@@ -43,10 +43,8 @@ export class ProfileComponent implements OnInit {
 
 	ngOnInit() {
 		let tempUser: User = this.authService.getStoredUserData();
-		console.log(tempUser.Id)
 
 		this.userService.getById(tempUser.Id).subscribe(userData => {
-			console.log(userData)
 			this.user = userData;
 			this.id = this.user.Id;
 			this.name = this.user.Name;

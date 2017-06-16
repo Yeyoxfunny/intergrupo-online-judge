@@ -17,11 +17,10 @@ export class AuthService {
   private session;
 
   private authUserUrl = AppSettings.authUrl + "authenticate";
-  //private userInfoUrl = this.authUserUrl + 'profiles';
-
+  
   constructor(private http: Http) {
       
-   }
+  }
   
   authenticateUser(user){
     let headers = new Headers();

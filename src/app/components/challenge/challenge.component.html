@@ -1,61 +1,21 @@
 <app-navbar></app-navbar>
 <div class="container">
-  <section class="challenge-content animated bounceInLeft z-depth-2 p-space m-top">
-    <header>
-      <a href="">Descargar archivos</a>
-      <a href="">Enviar solución</a>
+  <section class="challenge-content animated bounceInLeft z-depth-2 p-space m-space">
+    <header class="challenge-actions">
+      <a class="cursor-pointer waves-effect waves-light btn-flat" (click)="downloadChallenge()">
+      <i class="material-icons left">file_download</i>
+      Descargar archivos</a>
+      <a class="cursor-pointer waves-effect waves-light btn-flat" (click)="submitChallenge()">
+      <i class="material-icons left">send</i>
+      Enviar solución</a>
     </header>
+    <div class="divider"></div>
     <section>
       <h3 class="center">{{ challenge.title }}</h3>
       <div [innerHTML]="challenge.descriptionHTML"></div>  
     </section>
   </section>
-
-  <div class="solution-content row z-depth-1">
-    <header class="indigo title-toolbar">
-      <span class="white-text">Descargar Codigo</span>
-    </header>
-    <form class="p-half">
-      <div *ngFor="let language of challenge.languages">
-			<div class="input-field">
-				<strong>{{language.name}}</strong>
-				
-			</div>
-		<div class="file-field input-field">
-			<div class="btn indigo">
-				<a href="http://localhost:3001/files/{{language.sourceCodeUrl}}"><span>Descarga</span></a>
-			</div>
-			<div class="file-path-wrapper">
-				<input class="file-path" type="text" value="{{language.sourceCodeUrl}}">
-			</div>
-		</div>
-</div>
-</form>
 </div>
 
-<div class="solution-content row z-depth-1">
-  <header class="indigo title-toolbar">
-    <span class="white-text">Subir código como archivo</span>
-  </header>
-  <form class="p-half">
-    <div class="input-field">
-      <select materialize="material_select" [materializeSelectOptions]="languages">
-					<option *ngFor="let language of languages" value="language">{{ language }}</option>
-				</select>
-      <label class="control-label">Lenguaje</label>
-    </div>
-    <div class="file-field input-field">
-      <div class="btn indigo">
-        <span>File</span>
-        <input type="file">
-      </div>
-      <div class="file-path-wrapper">
-        <input class="file-path validate" type="text">
-      </div>
-    </div>
-    <div class="input-field">
-      <button class="btn btn-success indigo pull-right">Enviar</button>
-    </div>
-  </form>
-</div>
-</div>
+<app-download-modal></app-download-modal>
+<app-submit-modal></app-submit-modal>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
+
+import { MaterializeAction } from 'angular2-materialize';
 
 @Component({
   selector: 'app-submit-modal',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SubmitModalComponent implements OnInit {
 
-  constructor() { }
+	modalActions = new EventEmitter<string | MaterializeAction>();
+	
+	private languages: string[] = ["Java", "C#"];
 
-  ngOnInit() {
-  }
+	constructor() { }
 
+	ngOnInit() {
+	}
+
+	openModal(){
+		this.modalActions.emit({ action: "modal", params: ['open'] });
+	}
+
+	closeModal() {
+   	this.modalActions.emit({action:"modal", params:['close']});
+ 	}
 }

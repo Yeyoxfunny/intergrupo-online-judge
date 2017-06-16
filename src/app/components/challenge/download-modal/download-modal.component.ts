@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 
 import { MaterializeAction } from 'angular2-materialize';
 
+import { Language } from '../../../model/language';
+
 @Component({
   selector: 'app-download-modal',
   templateUrl: './download-modal.component.html',
@@ -9,18 +11,22 @@ import { MaterializeAction } from 'angular2-materialize';
 })
 export class DownloadModalComponent implements OnInit {
 
-	modalActions = new EventEmitter<string | MaterializeAction>();
+	private languages: Language[] = [];
 
+	modalActions = new EventEmitter<string | MaterializeAction>();
+	
 	constructor() { }
 
 	ngOnInit() {
 	}
 
-	openModal(){
+	openModal(languages: Array<Language>){
+		console.log(languages)
+		this.languages = languages;
 		this.modalActions.emit({ action: "modal", params: ['open'] });
 	}
 
 	closeModal() {
-   	this.modalActions.emit({action:"modal",params:['close']});
+   	this.modalActions.emit({action:"modal", params:['close']});
  	}
 }

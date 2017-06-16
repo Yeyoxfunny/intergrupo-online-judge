@@ -1,9 +1,24 @@
-<div id="modal1" class="modal">
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
 	<div class="modal-content">
-		<h4>Modal Header</h4>
-		<p>A bunch of text</p>
+		<h4 class="center">Descargar Archivos</h4>
+		<div class="divider"></div>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint ullam error, beatae molestias deserunt culpa, corporis itaque, illo, omnis facere dolores aliquid ad nostrum quo earum amet? Nostrum, eum, est.</p>
+		<div *ngFor="let language of languages">
+			<div class="input-field">
+				<strong>{{language.name}}</strong>
+			</div>
+			<div class="file-field input-field">
+				<div class="btn indigo">
+					<a href="http://localhost:3001/files/{{language.sourceCodeUrl}}" class="white-text">Descarga</a>
+				</div>
+				<div class="file-path-wrapper">
+					<input class="file-path" type="text" value="{{language.sourceCodeUrl}}">
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="modal-footer">
-		<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+		<a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+		<a class="modal-action modal-close waves-effect waves-green btn-flat">Aceptar</a>
 	</div>
 </div>

@@ -20,19 +20,22 @@ import { Difficulties } from '../../model/difficulty';
 
 @Component({
 	selector: 'app-register-test',
+	styleUrls: ['./register-test.component.css'],
 	templateUrl: './register-test.component.html'
 })
 
 export class RegisterTestComponent implements OnInit {
-	value;
+
 	difficulties: Array<any>;
 	testDescriptionHTML: string;
 	titleChallenge: string;
 	difficultyIndex: number = 0;
-	supportedLanguages = [{ value: "Java", checked: false, file: undefined }, { value: "C#", checked: false, file: undefined }];
-	languages;
-	filesToUpload: File[] = [];
-	files;
+
+	private supportedLanguages = [
+							{ value: "Java", checked: false, file: undefined },
+							{ value: "C#", checked: false, file: undefined }
+						];
+
 	constructor(
 		private router: Router,
 		private authService: AuthService,
@@ -46,20 +49,29 @@ export class RegisterTestComponent implements OnInit {
 	}
 
 	onSubmit() {
-		let params = {
-			titulo: this.titleChallenge.split(" ").join("-")
-		}
+		let challengeTitleWithoutSpaces = this.titleChallenge.replace(/\s/g, "-");
+
+		let selectedLanguages = this.getSelectedLanguages();
 
 		let challenge: Challenge = new ChallengeBuilder()
 			.setTitle(this.titleChallenge)
 			.setDescriptionHTML(JSON.stringify(this.testDescriptionHTML))
 			.setDifficulty(this.difficulties[this.difficultyIndex])
-			.setLanguages(this.languages)
+			.setLanguages(selectedLanguages)
 			.build();
+
+		this.saveChallenge(challenge);
+	}
+
+	saveChallenge(challenge: Challenge){
+		
+		let filesToUpload: File[] = this.supportedLanguages.filter(x => x.checked).map(x => x.file);
+		let challengeTitleWithoutSpaces = this.getTitleWithoutSpaces();
 
 		this.challengeService.add(challenge).subscribe(
 			(response) => {
-				this.uploadsService.makeFileRequest(this.filesToUpload, AppSettings.filesChallengeUrl, params);
+				this.uploadsService.makeFileRequest(filesToUpload, AppSettings.filesChallengeUrl, 
+																{ title: challengeTitleWithoutSpaces });
 				this.router.navigate(['app']);
 			},
 			(error) => {
@@ -70,29 +82,26 @@ export class RegisterTestComponent implements OnInit {
 			});
 	}
 
-	onSelect(check, value) {
-		if (check) {
-			this.value = value;
-			Materialize.toast('seleccionado: ' + value, 2000);
-		} else {
-			console.log('desselecionado: ' + value);
-		}
-	}
+	fileChangeEvent(language, fileInput: any) {
+		let file: File = fileInput.target.files[0];
 
-	fileChangeEvent(fileInput: any) {
-		let file = fileInput.target.files[0];
-		this.filesToUpload.push(file);
-		console.log(this.filesToUpload);
-		console.log(this.value);
-		this.filesToUpload.forEach((x, i) => this.files = this.filesToUpload[i].name);
-
-		this.languages = this
-			.supportedLanguages
-			.filter(x => x.checked)
-			.map(x => new Language(x.value, `${this.titleChallenge.split(" ").join("-")}/${x.value === 'Java' ? this.filesToUpload[0].name || this.filesToUpload[1].name : x.value === 'C#' && this.filesToUpload[1] === undefined ? this.filesToUpload[0].name : this.filesToUpload[1].name}`));
+		/* Object of the variable supportedLanguages */
+		language.file = file;
 	}
 
 	optionChange(value) {
 		this.difficultyIndex = value;
+	}
+
+	private getSelectedLanguages(){
+		let challengeTitleWithoutSpaces = this.getTitleWithoutSpaces();
+
+		return this.supportedLanguages
+						.filter(x => x.checked)
+						.map(x => new Language(x.value, `${challengeTitleWithoutSpaces}/${x.file.name}`));
+	}
+
+	private getTitleWithoutSpaces(): string{
+		return this.titleChallenge.replace(/\s/g, "-");
 	}
 }

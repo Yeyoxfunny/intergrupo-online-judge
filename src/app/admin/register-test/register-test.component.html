@@ -6,8 +6,12 @@
   <div class="row p-space">
     <form #challengeForm="ngForm">
       <div class="input-field col s12">
-        <input type="text" id="test" name="title" required placeholder #title="ngModel"  [(ngModel)]="titleChallenge">
+        <input type="text" id="test" name="title" required placeholder #title="ngModel"  
+        [(ngModel)]="titleChallenge">
         <label for="test">Título del test</label>
+        <!--<span [hidden]="title.valid || title.pristine" class="validation error">
+          Por favor ingresa el título
+        </span>-->
       </div>
 
       <div class="input-field col s12">
@@ -19,13 +23,21 @@
       </div>
 
       <div class="col s12">
-        <label>Lenguajes soportados</label>
-        <p *ngFor="let language of supportedLanguages">
-          <input type="checkbox" name="supported" class="filled-in" id="check-{{ language.value }}" [(ngModel)]="language.checked"
-            (change)="onSelect(language.checked ,language.value)" />
+        <label class="convert-block m-bottom">Lenguajes soportados</label>
+        <div *ngFor="let language of supportedLanguages">
+          <input type="checkbox" name="supported" class="filled-in" id="check-{{ language.value }}" [(ngModel)]="language.checked" />
           <label for="check-{{ language.value }}">{{ language.value }}</label>
-		  <input type="file" id="test" name="title" *ngIf="language.checked" (change)="fileChangeEvent($event)" >
-        </p>
+		  		
+					<div class="file-field input-field animated fadeInDown" *ngIf="language.checked">
+						<div class="btn indigo">
+							<span>File</span>
+							<input type="file" name="file" (change)="fileChangeEvent(language, $event)">
+						</div>
+						<div class="file-path-wrapper">
+							<input class="file-path validate" type="text">
+						</div>
+					</div>
+        </div>
       </div>
     </form>
 

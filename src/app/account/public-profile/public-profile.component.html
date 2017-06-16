@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <header class="header indigo z-depth-1">
-	<img src="assets/chuck.png" class="circle responsive-img">
+	<img [src]="user.ImageUrl? user.ImageUrl : '/assets/avatar-default.png'" class="circle responsive-img">
 	<h1>{{ user.Name }}</h1>
 	<span class="white-text">{{ user.Email }}</span>
 </header>

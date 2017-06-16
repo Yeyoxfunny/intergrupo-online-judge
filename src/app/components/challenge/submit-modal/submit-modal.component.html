@@ -1,3 +1,27 @@
-<p>
-  submit-modal works!
-</p>
+<div id="modal1" class="modal" materialize="modal" [materializeParams]="[{dismissible: false}]" [materializeActions]="modalActions">
+	<div class="modal-content">
+		<h4 class="center">Enviar Solución</h4>
+		<div class="divider"></div>
+		<form class="p-half">
+			<div class="input-field">
+				<select materialize="material_select" [materializeSelectOptions]="languages">
+					<option *ngFor="let language of languages" value="language">{{ language }}</option>
+				</select>
+				<label class="control-label">Lenguaje</label>
+			</div>
+			<div class="file-field input-field">
+				<div class="btn indigo">
+				  <span>File</span>
+				  <input type="file">
+				</div>
+				<div class="file-path-wrapper">
+				  <input class="file-path validate" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+		<a class="modal-action modal-close waves-effect waves-green btn-flat">Enviar</a>
+	</div>
+</div>

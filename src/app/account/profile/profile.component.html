@@ -9,10 +9,12 @@
 	</div>
 	<div class="profile-actions m-top animated fadeInDown" *ngIf="!!fileToUpload">
 		<a class="waves-effect waves-light btn amber accent-3">
-			<i class="material-icons left remove-margin" (click)="saveImage()">done</i>
+			Guardar
+			<i class="material-icons left" (click)="saveImage()">done</i>
 		</a>
 		<a class="waves-effect waves-light btn red accent-2" (click)="cancelUpload()">
-			<i class="material-icons left remove-margin">close</i>
+			Cancelar
+			<i class="material-icons left">close</i>
 		</a>
 	</div>
 
