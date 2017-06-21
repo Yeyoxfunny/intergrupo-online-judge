@@ -1,5 +1,5 @@
 export class AppSettings{
-	public static apiEndPoint = "http://localhost:3000/api/";
+	public static apiEndPoint = "https://0939da1f.ngrok.io/api/";
 	
 	/* Challenge Settings */
 	public static challengeUrl = AppSettings.apiEndPoint + "challenge/";
@@ -8,6 +8,9 @@ export class AppSettings{
 	/* User Settings */
 	public static userUrl = AppSettings.apiEndPoint + "users/";
 	public static imageProfileUrl = AppSettings.apiEndPoint + "upload/image/";
+
+	/* User Image Profile */
+	public static imageProfileBaseUrl = "https://0939da1f.ngrok.io/avatars/";
 
 	public static authUrl = AppSettings.apiEndPoint + "auth/";
 }

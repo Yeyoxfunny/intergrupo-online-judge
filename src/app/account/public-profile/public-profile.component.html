@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <header class="header indigo z-depth-1">
-	<img [src]="user.ImageUrl? user.ImageUrl : '/assets/avatar-default.png'" class="circle responsive-img">
-	<h1>{{ user.Name }}</h1>
-	<span class="white-text">{{ user.Email }}</span>
+	<img [src]="user.imageUrl? user.imageUrl : '/assets/avatar-default.png'" class="circle responsive-img">
+	<h1>{{ user.name }}</h1>
+	<span class="white-text">{{ user.email }}</span>
 </header>
 <div class="container">
 	<div class="row m-space">
@@ -12,16 +12,20 @@
 					<span class="white-text title-toolbar">Información del Usuario</span>
 				</header>
 				<section class="p-space">
-					<div class="row">
-						<div class="col s3"><strong>Nombre</strong></div>
-						<div class="col s9">{{ user.Name }}</div>
-
-						<div class="col s3"><strong>Username</strong></div>
-						<div class="col s9">{{ user.UserName }}</div>
-
-						<div class="col s3"><strong>Email</strong></div>
-						<div class="col s9">{{ user.Email }}</div>
-					</div>
+					<ul>
+						<li>
+							<strong>Nombre Completo</strong>
+							<div>{{ user.name }}</div>
+						</li>
+						<li>
+							<strong>Nombre de Usuario</strong>
+							<div>{{ user.username }}</div>
+						</li>
+						<li>
+							<strong>Correo Electrónico</strong>
+							<div>{{ user.email }}</div>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>

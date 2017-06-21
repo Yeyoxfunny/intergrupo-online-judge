@@ -19,6 +19,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.authService.getStoredUserData() || { username: '', email: ''};
+    console.log(this.user);
   }
   
   onLogoutClick(){

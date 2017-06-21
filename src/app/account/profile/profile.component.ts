@@ -61,13 +61,19 @@ export class ProfileComponent implements OnInit {
 		let params = { _id: this.user.id };
 
 		this.uploadService
-					.makeFileRequest([ this.fileToUpload ], AppSettings.imageProfileUrl, params)
-					.then(response => {
-						this.authService.updateStoreUserData(this.user);
-						this.fileToUpload = undefined;
-						console.log(response);
-					})
-					.catch(error => Materialize.toast('Ha ocurrido un error al intentar actualizar su imagen de perfil'));
+			.makeFileRequest([ this.fileToUpload ], AppSettings.imageProfileUrl, params)
+			.then((response: any) => {
+				let fileName = JSON.parse(response).name;
+
+				this.user.imageUrl = AppSettings.imageProfileBaseUrl + fileName;
+
+				this.userService.update(this.user.id, this.user)
+									.subscribe(response => {
+										this.authService.updateStoreUserData(this.user);
+										this.fileToUpload = undefined;	
+									});
+			})
+			.catch(error => Materialize.toast('Ha ocurrido un error al intentar actualizar su imagen de perfil'));
 	}
 
 	cancelUpload(){

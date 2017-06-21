@@ -21,6 +21,14 @@ export class UsersService {
 			.catch(this.handleError);
 	}
 
+	update(id: string, user: User): Observable<User>{
+		const url = AppSettings.userUrl + id;
+
+		return this.http.put(url, user)
+				.map(this.extractData)
+				.catch(this.handleError);
+	}
+
 	private extractData = (response) => {
 		if (response.status !== 200) {
 			throw response;
