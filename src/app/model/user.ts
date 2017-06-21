@@ -1,10 +1,10 @@
 export class User {
 
-	private id: string;
-	private name: string;
-	private username: string;
-	private email: string;
-	private imageUrl: string;
+	public id: string;
+	public name: string;
+	public username: string;
+	public email: string;
+	public imageUrl: string;
 
 	constructor(userBuilder: UserBuilder){
 		this.id = userBuilder.Id;

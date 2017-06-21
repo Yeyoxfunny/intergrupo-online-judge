@@ -12,7 +12,7 @@ import { UsersService } from '../../services/users.service';
 import { UploadService } from '../../services/upload.service';
 
 /* Models */
-import { User } from '../../model/user';
+import { User, UserBuilder } from '../../model/user';
 
 @Component({
 	selector: 'app-profile',
@@ -21,14 +21,7 @@ import { User } from '../../model/user';
 })
 export class ProfileComponent implements OnInit {
 
-	private user: User;
-	private id: string;
-	private name: string;
-	private firstName: string;
-	private firstLastName: string;
-	private username: string;
-	private email: string;
-	private imageUrl: string;
+	private user: User = UserBuilder.getEmptyUser();
 	private previousImageUrl: string;
 	private fileToUpload: any;
 	acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
@@ -44,17 +37,11 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() {
 		let tempUser: User = this.authService.getStoredUserData();
 
-		this.userService.getById(tempUser.Id).subscribe(userData => {
-			this.user = userData;
-			this.id = this.user.Id;
-			this.name = this.user.Name;
-			this.firstName = this.name.split(" ")[0];
-			this.firstLastName = this.name.split(" ")[1];
-			this.username = this.user.UserName;
-			this.email = this.user.Email;
-			this.imageUrl = this.user.ImageUrl;
-			this.previousImageUrl = this.imageUrl;
-		})
+		this.userService.getById(tempUser.Id)
+							.subscribe(userData => {
+											this.user = userData;
+											this.previousImageUrl = this.user.imageUrl;
+										})
 	}
 
 	fileChangeEvent(fileInput) {
@@ -71,24 +58,27 @@ export class ProfileComponent implements OnInit {
 	}
 
 	saveImage(){
-		let params = { _id: this.id };
+		let params = { _id: this.user.id };
+
 		this.uploadService
 					.makeFileRequest([ this.fileToUpload ], AppSettings.imageProfileUrl, params)
 					.then(response => {
 						this.authService.updateStoreUserData(this.user);
+						this.fileToUpload = undefined;
+						console.log(response);
 					})
 					.catch(error => Materialize.toast('Ha ocurrido un error al intentar actualizar su imagen de perfil'));
 	}
 
 	cancelUpload(){
 		this.fileToUpload = undefined;
-		this.imageUrl = this.previousImageUrl;
+		this.user.imageUrl = this.previousImageUrl;
 	}
 
 	private renderImageFromFile(file: File) {
 		let reader = new FileReader();
 		reader.readAsDataURL(file);
-		reader.onload = () => this.imageUrl = reader.result;
+		reader.onload = () => this.user.imageUrl = reader.result;
 		reader.onerror = console.error;
 	}
 }
