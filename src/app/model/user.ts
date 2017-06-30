@@ -5,13 +5,14 @@ export class User {
 	public username: string;
 	public email: string;
 	public imageUrl: string;
-
+  public isAdmin: boolean;
 	constructor(userBuilder: UserBuilder){
 		this.id = userBuilder.Id;
 		this.name = userBuilder.Name;
 		this.username = userBuilder.UserName;
 		this.email = userBuilder.Email;
 		this.imageUrl = userBuilder.ImageUrl;
+    this.isAdmin = userBuilder.IsAdmin;
 	}
 
 	get Id(){
@@ -41,6 +42,7 @@ export class UserBuilder{
 	private username: string;
 	private email: string;
 	private imageUrl: string;
+  private isAdmin: boolean;
 
 	setId(id: string){
 		this.id = id;
@@ -87,6 +89,14 @@ export class UserBuilder{
 		return this.imageUrl;
 	}
 
+  setIsAdmin(isAdmin: boolean){
+    this.isAdmin = isAdmin;
+    return this;
+  }
+  get IsAdmin(){
+    return this.isAdmin;
+  }
+
 	build(): User{
 		return new User(this);
 	}
@@ -98,6 +108,7 @@ export class UserBuilder{
 							.setUserName("")
 							.setImageUrl("")
 							.setEmail("")
+              .setIsAdmin(false)
 							.build();
 	}
 

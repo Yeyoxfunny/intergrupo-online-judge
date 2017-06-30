@@ -3,7 +3,7 @@
     <div class="nav-wrapper">
       <a routerLink="/app" class="brand-logo">IG Online Judge</a>
       <a materialize="sideNav" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>
-      
+
       <ul class="right hide-on-med-and-down">
         <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}">
           <a routerLink="/app/rank">
@@ -24,7 +24,7 @@
   <ul id="dropdown1" class="dropdown-content">
   	<li><a routerLink='/me'>Perfil</a></li>
   	<li class="divider"></li>
-  	<li><a routerLink="/admin">Dashboard</a></li>
+  	<li [hidden]="!user.isAdmin" ><a routerLink="/admin">Dashboard</a></li>
   	<li><a (click)="onLogoutClick()">Salir</a></li>
   </ul>
 </div>

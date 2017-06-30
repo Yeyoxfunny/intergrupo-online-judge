@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     this.user = this.authService.getStoredUserData() || { username: '', email: ''};
     console.log(this.user);
   }
-  
+
   onLogoutClick(){
     this.authService.logout();
     this.router.navigate(['']);

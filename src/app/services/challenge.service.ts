@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Challenge, ChallengeBuilder } from '../model/challenge';
@@ -9,19 +9,20 @@ import { AppSettings } from '../app.settings';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class ChallengeService {
 	private addTestUrl = AppSettings.apiEndPoint + "register";
 
-	constructor(private http: Http) { }
+	constructor(private http: Http, private authService: AuthService) { }
 
 	add(challenge: Challenge){
 		let body = {
 			title: challenge.title,
 			exampleHtml: challenge.descriptionHTML,
 			language: challenge.languages,
-			dificulty: challenge.difficulty 
+			dificulty: challenge.difficulty
 		};
 
 		return this.http.post(AppSettings.challengeUrl, body)

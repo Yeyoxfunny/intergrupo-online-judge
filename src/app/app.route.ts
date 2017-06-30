@@ -17,12 +17,12 @@ export const appRoutes: Routes = [
     { path: '', component: LoginComponent },
     ...accountRoutes,
     ...adminRoutes,
-    { 
+    {
       path: 'app',
       children: [
         { path: '', component: HomeComponent, canActivate: [AuthGuard] },
         { path: 'challenge/:id', component: ChallengeComponent, canActivate: [AuthGuard] },
         { path: 'rank', component: HackrankComponent, canActivate: [AuthGuard] }
       ]
-    }   
+    }
 ];

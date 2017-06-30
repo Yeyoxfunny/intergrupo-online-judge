@@ -11,17 +11,17 @@ import { AppSettings } from '../app.settings';
 
 @Injectable()
 export class AuthService {
-  
+
   public authToken: any;
   public user: any;
   private session;
 
   private authUserUrl = AppSettings.authUrl + "authenticate";
-  
+
   constructor(private http: Http) {
-      
+
   }
-  
+
   authenticateUser(user){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -51,6 +51,7 @@ export class AuthService {
                             .setName(storedUser.name)
                             .setUserName(storedUser.username)
                             .setEmail(storedUser.email)
+                            .setIsAdmin(storedUser.isAdmin)
                             .build();
     return user;
   }

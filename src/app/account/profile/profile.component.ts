@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
 				this.userService.update(this.user.id, this.user)
 									.subscribe(response => {
 										this.authService.updateStoreUserData(this.user);
-										this.fileToUpload = undefined;	
+										this.fileToUpload = undefined;
 									});
 			})
 			.catch(error => Materialize.toast('Ha ocurrido un error al intentar actualizar su imagen de perfil'));
