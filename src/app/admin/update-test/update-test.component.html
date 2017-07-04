@@ -1,0 +1,52 @@
+<div class="row z-depth-1 m-space">
+  <header class="teal">
+    <span class="white-text title-toolbar indigo">Challenge</span>
+  </header>
+
+  <div class="row p-space">
+    <form #challengeForm="ngForm">
+      <div class="input-field col s12">
+        <input type="text" id="test" name="title" required placeholder #title="ngModel" [(ngModel)]="titleChallenge" [value]="challenge.title">
+        <label for="test">Título del test</label>
+        <!--<span [hidden]="title.valid || title.pristine" class="validation error">
+          Por favor ingresa el título
+        </span>-->
+      </div>
+
+      <div class="input-field col s12">
+        <select #difficulty materialize="material_select" [materializeSelectOptions]="difficulties" (change)="optionChange(difficulty.value)">
+					<option *ngFor="let difficulty of difficulties; let i = index;"
+					[value]="i" [selected]="difficulty === initialDifficulty" >{{difficulty}}</option>
+				</select>
+        <label class="control-label">Dificultad</label>
+      </div>
+
+      <div class="col s12">
+        <label class="convert-block m-bottom">Lenguajes soportados</label>
+        <div *ngFor="let language of languages">
+          <input type="checkbox" name="supported" class="filled-in" checked="checked" />
+          <label for="check-{{ language.name }}">{{ language.name }}</label>
+
+          <div class="file-field input-field animated fadeInDown">
+            <div class="waves-effect waves-light btn indigo">
+              <span>File</span>
+              <input type="file" name="file" (change)="fileChangeEvent(language, $event)">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" [value]="language.sourceCodeUrl" >
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="input-field col s12">
+      <ckeditor [config]="{ height: '450px', resize_enabled: false }" [(ngModel)]="testDescriptionHTML" debounce="500">
+      </ckeditor>
+    </div>
+
+    <div class="input-field col s12">
+      <button type="submit" class="waves-effect waves-light btn indigo" (click)="onSubmit()" >Enviar</button>
+    </div>
+  </div>
+</div>

@@ -3,6 +3,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { MaterializeAction } from 'angular2-materialize';
 
 import { Language } from '../../../model/language';
+import { DownloadService } from '../../../services/download.service';
 
 @Component({
   selector: 'app-download-modal',
@@ -11,22 +12,30 @@ import { Language } from '../../../model/language';
 })
 export class DownloadModalComponent implements OnInit {
 
-	private languages: Language[] = [];
+  private languages: Language[] = [];
 
-	modalActions = new EventEmitter<string | MaterializeAction>();
-	
-	constructor() { }
+  modalActions = new EventEmitter<string | MaterializeAction>();
 
-	ngOnInit() {
-	}
+  constructor(private downloadService: DownloadService) { }
 
-	openModal(languages: Array<Language>){
-		console.log(languages)
-		this.languages = languages;
-		this.modalActions.emit({ action: "modal", params: ['open'] });
-	}
+  ngOnInit() {
+  }
 
-	closeModal() {
-   	this.modalActions.emit({action:"modal", params:['close']});
- 	}
+  openModal(languages: Array<Language>) {
+    console.log(languages)
+    this.languages = languages;
+    this.modalActions.emit({ action: "modal", params: ['open'] });
+  }
+
+  downloadFile(sourceCodeUrl) {
+    this.downloadService.downloadChallenge(sourceCodeUrl).subscribe(
+      data => window.open(data.url) ,
+      error => console.log("Error downloading the file." + error),
+      () => console.log('Completed file download.')
+    )
+  }
+
+  closeModal() {
+    this.modalActions.emit({ action: "modal", params: ['close'] });
+  }
 }

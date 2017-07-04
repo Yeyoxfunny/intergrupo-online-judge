@@ -31,6 +31,8 @@ import { ChallengeService } from './services/challenge.service';
 import { UploadService } from './services/upload.service';
 /* App Routes */
 import { appRoutes } from './app.route';
+import { DownloadService } from './services/download.service';
+import { AdminGuard } from './guards/admin.guard';
 
 
 @NgModule({
@@ -52,9 +54,9 @@ import { appRoutes } from './app.route';
     AccountModule,
     AdminModule,
     FlashMessagesModule,
-    MaterializeModule 
+    MaterializeModule
   ],
-  providers: [ValidateService, AuthService, ChallengeService, AuthGuard, UploadService],
+  providers: [ValidateService, AuthService, ChallengeService, AuthGuard, AdminGuard, UploadService, DownloadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

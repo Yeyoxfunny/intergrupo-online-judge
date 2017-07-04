@@ -52,6 +52,7 @@ export class AuthService {
                             .setUserName(storedUser.username)
                             .setEmail(storedUser.email)
                             .setIsAdmin(storedUser.isAdmin)
+                            .setImageUrl(storedUser.imageUrl)
                             .build();
     return user;
   }

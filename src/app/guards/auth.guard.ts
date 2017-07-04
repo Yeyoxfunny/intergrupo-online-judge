@@ -5,7 +5,7 @@ import { AuthService } from '../services/auth.service';
 @Injectable()
 
 export class AuthGuard implements CanActivate {
-    
+
     constructor(
         private authService: AuthService,
         private router: Router
@@ -18,5 +18,14 @@ export class AuthGuard implements CanActivate {
             this.router.navigate(['']);
             return false;
         }
+    }
+
+    isAdmin(){
+      if (this.authService.getStoredUserData().isAdmin) {
+        return true
+      } else {
+        this.router.navigate(['']);
+        return false;
+      }
     }
 }

@@ -22,13 +22,25 @@ export class ChallengeService {
 			title: challenge.title,
 			exampleHtml: challenge.descriptionHTML,
 			language: challenge.languages,
-			dificulty: challenge.difficulty
+			difficulty: challenge.difficulty
 		};
 
 		return this.http.post(AppSettings.challengeUrl, body)
 							.map(this.extractData)
 							.catch(this.handleError);
 	}
+  update(id, challenge: Challenge){
+    let body = {
+			title: challenge.title,
+			exampleHtml: challenge.descriptionHTML,
+			language: challenge.languages,
+			difficulty: challenge.difficulty
+		};
+
+    return this.http.put(AppSettings.challengeUrl+id, body)
+							.map(this.extractData)
+							.catch(this.handleError);
+  }
 
 	getAll(): Observable<Challenge[]>{
 		return this.http
@@ -69,7 +81,7 @@ export class ChallengeService {
 							.setTitle(data.title)
 							.setDescriptionHTML(JSON.parse(data.exampleHtml))
 							.setLanguages(languages)
-							.setDifficulty(data.dificulty)
+							.setDifficulty(data.difficulty)
 							.build();
 		return challenge;
 	}

@@ -29,6 +29,14 @@ export class UsersService {
 				.catch(this.handleError);
 	}
 
+  updateImage(id: any, user: any){
+    console.log(user.imageUrl);
+    const url = AppSettings.userUrl;
+    return this.http.put(`${url}updateImage/${id}`, {imageUrl: user.imageUrl})
+    .map(this.extractData)
+    .catch(this.handleError);
+  }
+
 	private extractData = (response) => {
 		if (response.status !== 200) {
 			throw response;

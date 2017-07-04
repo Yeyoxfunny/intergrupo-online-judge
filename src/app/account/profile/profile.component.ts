@@ -67,7 +67,7 @@ export class ProfileComponent implements OnInit {
 
 				this.user.imageUrl = AppSettings.imageProfileBaseUrl + fileName;
 
-				this.userService.update(this.user.id, this.user)
+				this.userService.updateImage(this.user.id, this.user)
 									.subscribe(response => {
 										this.authService.updateStoreUserData(this.user);
 										this.fileToUpload = undefined;

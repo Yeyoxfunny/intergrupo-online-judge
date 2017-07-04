@@ -1,6 +1,6 @@
 
-const easyDifficulty = "Fácil";
+const easyDifficulty = "Facil";
 const normalDifficulty = "Medio";
-const hardDifficulty = "Díficil";
+const hardDifficulty = "Dificil";
 
 export const Difficulties = [ easyDifficulty, normalDifficulty, hardDifficulty ];

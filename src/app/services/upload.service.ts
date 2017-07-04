@@ -12,16 +12,16 @@ export class UploadService {
 			let xhr: XMLHttpRequest = new XMLHttpRequest();
 
 			for(let i = 0; i < files.length; i++){
-				formData.append("uploads[]", files[i], files[i].name);	
+				formData.append("uploads[]", files[i], files[i].name);
 			}
-			if (params.titulo) {
-				formData.append('titulo', params.titulo);
+			if (params.title) {
+				formData.append('titulo', params.title);
 			}
 
 			if (params._id) {
 				formData.append('_id', params._id);
 			}
-			
+
 			xhr.onreadystatechange = function() {
 				if(xhr.readyState === 4){
 					if(xhr.status !== 200){
