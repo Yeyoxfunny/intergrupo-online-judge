@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 //models
 import { User } from '../../model/user';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-hackrank',
@@ -17,31 +17,12 @@ export class HackrankComponent implements OnInit {
   public users: Array<any>;
   public numMayor: number;
   constructor(
-    private _authService: AuthService,
+    private userService: UsersService,
     private _router: Router
   ) { }
 
   ngOnInit() {
     this.getUsers();
-  }
-
-  getAllUsers() {
-    this._authService.getAllUsers().subscribe(
-      result => {
-        this.users = result.data;
-        this.status = result.status;
-        console.log(result.status);
-        if (this.status != "success") {
-          alert("Error en el servidor");
-        }
-      },
-      error => {
-        this.errorMessage = <any>error;
-        if (this.errorMessage !== null) {
-          console.log(this.errorMessage);
-          alert("Error");
-        }
-      });
   }
 
   getUsers() {
@@ -105,9 +86,6 @@ export class HackrankComponent implements OnInit {
     this.users.sort(function (a, b): number {
       return b.puntaje - a.puntaje;
     });
-    
+
   }
-
-  
-
 }

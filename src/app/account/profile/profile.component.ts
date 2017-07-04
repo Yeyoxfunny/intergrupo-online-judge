@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
 	ngOnInit() {
 		let tempUser: User = this.authService.getStoredUserData();
 
-		this.userService.getById(tempUser.Id)
+		this.userService.getById(tempUser.id)
 							.subscribe(userData => {
 											this.user = userData;
 											this.previousImageUrl = this.user.imageUrl;
@@ -45,8 +45,8 @@ export class ProfileComponent implements OnInit {
 	}
 
 	fileChangeEvent(fileInput) {
-		let tempFile = fileInput.target.files[0];
-		let isValidFile: boolean = this.acceptFileTypes.test(tempFile.type);
+		const tempFile = fileInput.target.files[0];
+		const isValidFile: boolean = this.acceptFileTypes.test(tempFile.type);
 
 		if (!isValidFile) {
 			Materialize.toast('Archivo no soportado, extensiones válidas: gif, png, jpg, jpeg', 4000);
@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	saveImage(){
-		let params = { _id: this.user.id };
+		const params = { _id: this.user.id };
 
 		this.uploadService
 			.makeFileRequest([ this.fileToUpload ], AppSettings.imageProfileUrl, params)
@@ -82,7 +82,7 @@ export class ProfileComponent implements OnInit {
 	}
 
 	private renderImageFromFile(file: File) {
-		let reader = new FileReader();
+		const reader = new FileReader();
 		reader.readAsDataURL(file);
 		reader.onload = () => this.user.imageUrl = reader.result;
 		reader.onerror = console.error;

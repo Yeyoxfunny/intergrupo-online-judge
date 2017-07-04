@@ -44,9 +44,11 @@ export class UsersService {
 		let user: User = new UserBuilder()
 			.setId(data._id)
 			.setName(data.name)
+      .setSurname(data.surname)
 			.setUserName(data.username)
 			.setEmail(data.email)
 			.setImageUrl(data.imageUrl)
+      .setJobTitle(data.jobTitle)
 			.build();
 
 		return user;

@@ -18,13 +18,11 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.user = this.authService.getStoredUserData() || { username: '', email: ''};
-    console.log(this.user);
+    this.user = this.authService.getStoredUserData() || { username: '', email: '', imageUrl: ''};
   }
 
   onLogoutClick(){
     this.authService.logout();
     this.router.navigate(['']);
   }
-
 }

@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
+import { Http, Response } from '@angular/http';
 
-
+import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
+
 import { tokenNotExpired } from 'angular2-jwt';
 
+/* External Library */
+import * as kurve from 'kurvejs';
+
+/* Models */
 import { User, UserBuilder } from '../model/user';
+
+/* Settings */
 import { AppSettings } from '../app.settings';
 
 
@@ -16,21 +23,37 @@ export class AuthService {
   public user: any;
   private session;
 
-  private authUserUrl = AppSettings.authUrl + "authenticate";
+  private authUserUrl = AppSettings.authUrl + 'authenticate';
+  private kurveId = new kurve.Identity(AppSettings.clientID, AppSettings.tokenProcessorUrl,
+                                  { endpointVersion: kurve.EndpointVersion.v1 });
 
   constructor(private http: Http) {
 
   }
 
-  authenticateUser(user){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.post(this.authUserUrl, user, {headers: headers})
-                    .map(res => res.json());
+  authenticateUser(): Promise<any> {
+    return this.kurveId.loginAsync().then(_ => {
+      const graph = new kurve.Graph(this.kurveId);
+      return graph.me.GetUser().then(profileData => {
+        const user = {
+          name: profileData.givenName,
+          surname: profileData.surname,
+          email: profileData.mail,
+          jobTitle: profileData.jobTitle
+        };
+
+        return this.http.post(AppSettings.authUrl, user).toPromise();
+      });
+    })
+    .then(this.checkStatus);;
   }
 
-  getAllUsers(){
-    return this.http.get(AppSettings.userUrl).map(res => res.json());
+  private checkStatus(response: Response | any) {
+    if (response.status !==  200) {
+      throw response;
+    }
+
+    return response.json();
   }
 
   storeUserData(token, user){
@@ -41,16 +64,19 @@ export class AuthService {
   }
 
   getStoredUserData(): User{
-    let storedUser = JSON.parse(localStorage.getItem('user'));
+    const storedUser = JSON.parse(localStorage.getItem('user'));
     return this.convertToUser(storedUser);
   }
 
   convertToUser(storedUser): User{
-    let user: User = new UserBuilder()
+    const user: User = new UserBuilder()
                             .setId(storedUser.id)
                             .setName(storedUser.name)
+                            .setSurname(storedUser.surname)
                             .setUserName(storedUser.username)
                             .setEmail(storedUser.email)
+                            .setJobTitle(storedUser.jobTitle)
+                            .setImageUrl(storedUser.imageUrl)
                             .setIsAdmin(storedUser.isAdmin)
                             .build();
     return user;
@@ -58,11 +84,11 @@ export class AuthService {
 
   updateStoreUserData(user: User){
     let storeUser = JSON.parse(localStorage.getItem('user'));
-    storeUser.id = user.Id;
-    storeUser.name = user.Name;
-    storeUser.username = user.UserName;
-    storeUser.email = user.Email;
-    storeUser.imageUrl = user.ImageUrl;
+    storeUser.id = user.id;
+    storeUser.name = user.name;
+    storeUser.username = user.username;
+    storeUser.email = user.email;
+    storeUser.imageUrl = user.imageUrl;
 
     localStorage.setItem('user', JSON.stringify(storeUser));
   }
@@ -71,6 +97,7 @@ export class AuthService {
     this.authToken = null;
     this.user = null;
     localStorage.clear();
+    this.kurveId.logOut();
   }
 
   loggedIn(){
