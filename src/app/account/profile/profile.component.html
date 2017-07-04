@@ -18,8 +18,9 @@
 		</a>
 	</div>
 
-	<h1>{{ user.name }}</h1>
-	<span style="display: block;" class="white-text m-bottom">{{ user.email }}</span>
+	<h1>{{ user.username }}</h1>
+	<span style="display: block;" class="white-text">{{ user.email }}</span>
+  <span style="display: block;" class="white-text">{{ user.jobTitle }}</span>
 </header>
 
 <div class="container animated fadeIn">
@@ -32,10 +33,14 @@
 
 				<form class="p-space">
 					<div class="row">
-						<div class="input-field col s12">
-							<input type="text" placeholder id="first_name" name="first_name" [(ngModel)]="user.name">
-							<label for="first_name">Nombre Completo</label>
+						<div class="input-field col s6">
+							<input type="text" placeholder id="name" name="name" [(ngModel)]="user.name">
+							<label for="name">Nombres</label>
 						</div>
+            <div class="input-field col s6">
+              <input type="text" placeholder id="surname" name="surname" [(ngModel)]="user.surname">
+							<label for="surname">Apellidos</label>
+            </div>
 						<div class="input-field col s12">
 							<input type="text" id="username" name="username" placeholder [(ngModel)]="user.username">
 							<label for="username">Nombre de Usuario</label>

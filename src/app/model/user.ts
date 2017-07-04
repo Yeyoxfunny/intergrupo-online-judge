@@ -2,45 +2,32 @@ export class User {
 
 	public id: string;
 	public name: string;
+  public surname: string;
 	public username: string;
 	public email: string;
+  public jobTitle: string;
 	public imageUrl: string;
   public isAdmin: boolean;
+
 	constructor(userBuilder: UserBuilder){
 		this.id = userBuilder.Id;
 		this.name = userBuilder.Name;
+    this.surname = userBuilder.Surname;
 		this.username = userBuilder.UserName;
 		this.email = userBuilder.Email;
 		this.imageUrl = userBuilder.ImageUrl;
+    this.jobTitle = userBuilder.JobTitle;
     this.isAdmin = userBuilder.IsAdmin;
-	}
-
-	get Id(){
-		return this.id;
-	}
-
-	get Name(){
-		return this.name;
-	}
-
-	get UserName(){
-		return this.username;
-	}
-
-	get Email(){
-		return this.email;
-	}
-
-	get ImageUrl(){
-		return this.imageUrl;
 	}
 }
 
 export class UserBuilder{
 	private id: string;
 	private name: string;
+  private surname: string;
 	private username: string;
 	private email: string;
+  private jobTitle: string;
 	private imageUrl: string;
   private isAdmin: boolean;
 
@@ -61,6 +48,15 @@ export class UserBuilder{
 	get Name(){
 		return this.name;
 	}
+
+  setSurname(surname: string){
+    this.surname = surname;
+    return this;
+  }
+
+  get Surname(){
+    return this.surname;
+  }
 
 	setUserName(username: string){
 		this.username = username;
@@ -89,6 +85,15 @@ export class UserBuilder{
 		return this.imageUrl;
 	}
 
+  setJobTitle(jobTitle){
+    this.jobTitle = jobTitle;
+    return this;
+  }
+
+  get JobTitle(){
+    return this.jobTitle;
+  }
+
   setIsAdmin(isAdmin: boolean){
     this.isAdmin = isAdmin;
     return this;
@@ -103,11 +108,11 @@ export class UserBuilder{
 
 	static getEmptyUser(): User{
 		return new UserBuilder()
-							.setId("")
-							.setName("")
-							.setUserName("")
-							.setImageUrl("")
-							.setEmail("")
+							.setId('')
+							.setName('')
+							.setUserName('')
+							.setImageUrl('')
+							.setEmail('')
               .setIsAdmin(false)
 							.build();
 	}

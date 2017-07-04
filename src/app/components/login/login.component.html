@@ -7,20 +7,11 @@
 				</header>
 				<form (ngSubmit)="onLoginSubmit()" class="form-horizontal p-half">
 					<div class="row">
-						<div class="input-field col s12">
-							<i class="material-icons prefix">account_circle</i>
-							<input type="text" id="username" class="form-control" [(ngModel)]="username" name="username">
-							<label for="username">Usuario</label>
-						</div>
-
-						<div class="input-field col s12">
-							<i class="material-icons prefix">lock</i>
-							<input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" name="password">
-							<label for="inputPassword">Contraseña</label>
-						</div>
-
 							<div class="input-field col s12">
-									<input type="submit" value="Entrar" class="btn btn-primary indigo darken-4" style="width: 100%;">
+									<button type="submit" class="btn btn-primary indigo darken-4" style="width: 100%;">
+                    <i class="icon-windows"></i>
+                    Ingresar con Microsoft
+                  </button>
 							</div>
 						</div>
 				</form>

@@ -13,10 +13,6 @@ import * as Materialize from 'angular2-materialize';
 
 export class LoginComponent implements OnInit {
 
-  username: String;
-  password: String;
-  auth: String;
-
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -29,19 +25,13 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginSubmit() {
-    const user = {
-      username: this.username,
-      password: this.password
-    }
-
-    this.authService.authenticateUser(user).subscribe(data => {
-      if (!data.success) {
-        console.log(data);
-        this.flashMessage.show(data.msg, { cssClass: 'alert-error', timeout: 5000});
+    this.authService.authenticateUser().then(response => {
+      if (!response.success) {
+        Materialize.toast(response.msg);
         return;
       }
-      
-      this.authService.storeUserData(data.token, data.user);
+
+      this.authService.storeUserData(response.token, response.user);
       this.router.navigate(['app']);
     });
   }
