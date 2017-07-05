@@ -4,27 +4,26 @@
     <i class="material-icons">filter_list</i>
   </a>
   <ul>
-    <li class="waves-effect waves-light"><a #easy  (click)="filterByDifficulty(easy.text)">Facil</a></li>
-    <li class="waves-effect waves-light"><a #medium  (click)="filterByDifficulty(medium.text)">Medio</a></li>
-	<li class="waves-effect waves-light"><a #hard  (click)="filterByDifficulty(hard.text)">Dificil</a></li>
+    <li class="waves-effect waves-light"><a #easy (click)="filterByDifficulty(easy.text)">Facil</a></li>
+    <li class="waves-effect waves-light"><a #medium (click)="filterByDifficulty(medium.text)">Medio</a></li>
+    <li class="waves-effect waves-light"><a #hard (click)="filterByDifficulty(hard.text)">Dificil</a></li>
   </ul>
 </div>
 <div class="container animated bounceIn">
-	<div class="row">
-		<div class="col s6" *ngFor="let challenge of challenges">
-			<div class="card">
-				<div class="card-content">
-			    	<a class="challenge-title" [routerLink]="['challenge', challenge.id]">{{challenge.title}}</a>
-			    	<b>Dificultad:</b>
-			    	<span>{{challenge.difficulty}}</span>
-			    	<a class="btn btn-success indigo darken-4 pull-right" [routerLink]="['challenge', challenge.id]">Resolver</a>
-				</div>
-				<div class="card-action">
-					<span class="chip" 
-							style="margin: 0 .5rem" 
-							*ngFor="let language of challenge.languages">{{ language.name }}</span>
-				</div>
-			</div>	
-		</div>
-	</div>
+  <div class="row">
+    <div class="col s6" *ngFor="let challenge of challenges">
+      <div class="card">
+        <div class="card-content">
+          <a class="challenge-title" [routerLink]="['challenge', challenge.id]">{{challenge.title}}</a>
+          <b>Dificultad:</b>
+          <span>{{challenge.difficulty}}</span>
+          <a class="btn btn-success indigo darken-4 pull-right" [routerLink]="['challenge', challenge.id]">Resolver</a>
+        </div>
+        <div class="card-action">
+          <span class="chip" style="margin: 0 .5rem" *ngFor="let language of challenge.languages">{{ language.name }}</span>
+          <a *ngIf="isAdmin" class="waves-effect waves-light btn-floating indigo right" [routerLink]="['/admin/update', challenge.id]"><i class="material-icons">mode_edit</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

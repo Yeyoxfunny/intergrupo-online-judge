@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ChallengeService } from '../../services/challenge.service';
 import { Challenge } from '../../model/challenge';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
 	selector: 'app-home',
@@ -12,8 +13,11 @@ export class HomeComponent implements OnInit {
 
 	challenges: Array<Challenge>
 	difficulty;
-	//supportedLanguages = [{ name: "Facil" }, { value: "C#" }];
-	constructor(private challengeService: ChallengeService) { }
+  isAdmin: boolean;
+	constructor(
+    private challengeService: ChallengeService,
+    private authService: AuthService
+    ) { }
 
 	ngOnInit() {
 		this.challengeService.getAll()
@@ -21,6 +25,7 @@ export class HomeComponent implements OnInit {
 				this.challenges = data
 			},
 			errorMsg => this.challenges = []);
+      this.isAdmin = this.authService.getStoredUserData().isAdmin;
 	}
 
 	optionChange(value) {

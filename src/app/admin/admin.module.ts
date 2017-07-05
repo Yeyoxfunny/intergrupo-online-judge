@@ -14,6 +14,7 @@ import { MaterializeModule } from "angular2-materialize";
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RegisterTestComponent } from './register-test/register-test.component';
 import { AdminHomeComponent } from './admin-home/admin-home.component';
+import { UpdateTestComponent } from './update-test/update-test.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { AdminHomeComponent } from './admin-home/admin-home.component';
   declarations: [
   		DashboardComponent,
   		RegisterTestComponent,
-  		AdminHomeComponent
+  		AdminHomeComponent,
+  		UpdateTestComponent
   ]
 })
 export class AdminModule { }

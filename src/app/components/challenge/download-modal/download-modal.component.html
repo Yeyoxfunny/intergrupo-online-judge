@@ -9,7 +9,7 @@
 			</div>
 			<div class="file-field input-field">
 				<div class="btn indigo">
-					<a href="http://localhost:3001/files/{{language.sourceCodeUrl}}" class="white-text">Descarga</a>
+					<a class="white-text" (click)="downloadFile(language.sourceCodeUrl)" >Descargar</a>
 				</div>
 				<div class="file-path-wrapper">
 					<input class="file-path" type="text" value="{{language.sourceCodeUrl}}">
