@@ -18,8 +18,8 @@ export class PublicProfileComponent implements OnInit {
 
 	ngOnInit() {
 		this.route.params.subscribe(params => {
-			const id = params['id'];
-			this.usersService.getById(id).subscribe(data => this.user = data);
-		})
+			const username: string = params['username'];
+			this.usersService.getByUsername(username).subscribe(data => this.user = data);
+		});
 	}
 }

@@ -35,6 +35,7 @@ export class AuthService {
     return this.kurveId.loginAsync().then(_ => {
       const graph = new kurve.Graph(this.kurveId);
       return graph.me.GetUser().then(profileData => {
+        console.log(profileData);
         const user = {
           name: profileData.givenName,
           surname: profileData.surname,

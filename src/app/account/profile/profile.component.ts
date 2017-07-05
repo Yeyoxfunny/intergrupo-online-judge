@@ -35,13 +35,13 @@ export class ProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		let tempUser: User = this.authService.getStoredUserData();
+		const tempUser: User = this.authService.getStoredUserData();
 
-		this.userService.getById(tempUser.id)
+		this.userService.getByUsername(tempUser.username)
 							.subscribe(userData => {
 											this.user = userData;
 											this.previousImageUrl = this.user.imageUrl;
-										})
+										});
 	}
 
 	fileChangeEvent(fileInput) {

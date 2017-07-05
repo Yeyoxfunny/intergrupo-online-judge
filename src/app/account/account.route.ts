@@ -6,5 +6,5 @@ import { PublicProfileComponent } from './public-profile/public-profile.componen
 
 export const accountRoutes: Routes = [
 						{ path: 'me', component: ProfileComponent, canActivate: [ AuthGuard ] },
-						{ path: 'user/:id', component: PublicProfileComponent, canActivate: [ AuthGuard ] }
+						{ path: 'user/:username', component: PublicProfileComponent, canActivate: [ AuthGuard ] }
 					];

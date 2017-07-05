@@ -7,13 +7,14 @@ import { AppSettings } from '../app.settings';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+
 @Injectable()
 export class UsersService {
 
 	constructor(private http: Http) { }
 
-	getById(id: string): Observable<User> {
-		const url = AppSettings.userUrl + id;
+	getByUsername(username: string): Observable<User> {
+		const url = AppSettings.userUrl + username;
 
 		return this.http.get(url)
 			.map(this.extractData)
@@ -41,7 +42,7 @@ export class UsersService {
 	}
 
 	private convertToUser = (data): User => {
-		let user: User = new UserBuilder()
+		const user: User = new UserBuilder()
 			.setId(data._id)
 			.setName(data.name)
       .setSurname(data.surname)
